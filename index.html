@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Il mio sito GitHub Pages</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;max-width:900px;margin:2rem auto;padding:0 1rem}
+    header{display:flex;justify-content:space-between;align-items:center}
+    footer{margin-top:3rem;color:#666;font-size:0.9rem}
+    a{color:inherit}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Il mio sito su GitHub Pages</h1>
+    <nav><a href="#about">About</a></nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>Ciao! 👋</h2>
+      <p>Modifica questo file e fai <code>git push</code> per aggiornare il sito.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="anno"></span> Il tuo nome</p>
+  </footer>
+
+  <script>document.getElementById('anno').textContent = new Date().getFullYear();</script>
+</body>
+</html>
