@@ -1,33 +1,41 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Il mio sito GitHub Pages</title>
-  <style>
-    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;max-width:900px;margin:2rem auto;padding:0 1rem}
-    header{display:flex;justify-content:space-between;align-items:center}
-    footer{margin-top:3rem;color:#666;font-size:0.9rem}
-    a{color:inherit}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio Statistics Homeworks</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
-    <h1>Il mio sito su GitHub Pages</h1>
-    <nav><a href="#about">About</a></nav>
-  </header>
+    <h1>🧮 Portfolio Statistics Homeworks</h1>
+    <!--
+    <nav>
+      <button id="toggle-theme" title="Cambia tema">🌓</button>
+    </nav>
+    -->
+    </header>
 
   <main>
-    <section id="about">
-      <h2>Ciao! Sono Christian👋</h2>
-      <p>Modifica questo file e fai <code>git push</code> per aggiornare il sito.</p>
+    <section class="intro">
+      <h2>Statistics - Master's degree Cybersecurity</h2>
+      <p>This is a personal blog for publishing the statistics homework for the Master’s Degree in Cybersecurity, academic year 2025–2026</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h3><a href="homeworks/hw1/">Homework 1</a></h3>
+        <p>What is statistics, and why can it be useful for cybersecurity?</p>
+      </article>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="anno"></span> Il tuo nome</p>
+    <p>© 2025 – Realizzato da Christian Capitani 1905211</p>
   </footer>
 
-  <script>document.getElementById('anno').textContent = new Date().getFullYear();</script>
+  <script src="js/main.js"></script>
 </body>
 </html>
