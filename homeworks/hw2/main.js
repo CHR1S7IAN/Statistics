@@ -1,4 +1,39 @@
+/**
+ * Trova la chiave del Cifrario di Cesare trovando lo shift che minimizza
+ * la somma delle differenze al quadrato tra le due distribuzioni.
+ * @param {number[]} originalFreq - Array di 26 conteggi per il testo originale.
+ * @param {number[]} cipherFreq - Array di 26 conteggi per il testo cifrato.
+ * @returns {number} La chiave di shift più probabile.
+ */
+function findShiftKeyByMinDifference(originalFreq, cipherFreq) {
+    let bestShift = 0;
+    let minDifference = Infinity;
 
+    // 1. Prova ogni possibile shift da 0 a 25
+    for (let shift = 0; shift < 26; shift++) {
+        let currentDifference = 0;
+
+        // 2. Calcola la somma delle differenze al quadrato per lo shift corrente
+        for (let i = 0; i < 26; i++) {
+            // 3. "Sposta indietro" l'indice della distribuzione cifrata
+            const shiftedIndex = (i + shift) % 26;
+            
+            const freqOriginal = originalFreq[i];
+            const freqCipherShifted = cipherFreq[shiftedIndex];
+
+            // 4. Calcola la differenza al quadrato e sommala
+            currentDifference += Math.pow(freqOriginal - freqCipherShifted, 2);
+        }
+
+        // 5. Se questa differenza è la più bassa trovata finora, salvala
+        if (currentDifference < minDifference) {
+            minDifference = currentDifference;
+            bestShift = shift;
+        }
+    }
+
+    return bestShift;
+}
 // Selezioniamo tutti gli elementi HTML
 const textInput = document.getElementById('textInput');
 const shiftKeyInput = document.getElementById('shiftKey');
@@ -96,7 +131,11 @@ analyzeButton.addEventListener('click', () => {
         cipherFrequency.labels, 
         cipherFrequency.data
     );
-    
+    // 5. Trova la chiave confrontando le distribuzioni
+    const foundKey = findShiftKeyByMinDifference(originalFrequency.data, cipherFrequency.data);
+
+    // 6. Mostra il risultato all'utente
+    document.getElementById('foundKeyResult').textContent = foundKey;
 });
 /*
 
