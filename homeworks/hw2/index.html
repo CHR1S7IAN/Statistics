@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Homework 2</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body class="homework-page">
+  <header>
+    <h1><a href="../../index.html">← Portfolio Homework</a></h1>
+  </header>
+
+  <main>
+    <article class="intro">
+      <h2>Homework 2</h2>
+      <p><strong>Deadline:</strong> 2025-10-16</p>
+    </article>
+
+    <section class="intro">
+        <p><strong>Assignment 1:</strong> Explain the concept of dataset and distribution </p>
+
+        <h4>Concept of Dataset</h4>
+            <p>
+                A <strong>dataset</strong> is a collection of data points organized in a structured form,
+                often as a table with rows (observations) and columns (variables).
+                Each row represents an individual record, and each column represents a feature or attribute.
+                For example, a dataset of students might include their names, ages, and grades.
+            </p>
+
+        <h4>Concept of Distribution</h4>
+            <p>
+                A <strong>distribution</strong> describes how values of a variable are spread out —
+                that is, the pattern or frequency with which different values occur.
+                It shows whether the data are clustered around certain values, evenly spread, or skewed.
+            </p>
+
+        <h4>Relationship Between Dataset and Distribution</h4>
+            <p>
+                A dataset is the actual sample of data collected, while a distribution is the
+                underlying pattern that the dataset represents.
+                In other words, the dataset is what you have;
+                the distribution is how those values are arranged or behave statistically.
+            </p>
+    </section>
+
+    <h2></h2>
+
+    <section class="intro">
+        <p>
+          <strong>Assignment 2:</strong>
+          Create a simple dataset and compute the K univariate distribution (K&#60=3)
+        </p>
+        <h4>First Step</h4>
+        <p>
+          In this case I used a python script that is a self-contained data pipeline that manages, analyzes, and visualizes a small dataset using an SQLite database and the Matplotlib library.
+        </p>
+        <p>In particular, it connects to a local SQLite database file and populates it with initial sample (random!!) data.</p>
+        <pre><code>
+          conn = sqlite3.connect("people_db.sqlite")
+          cur = conn.cursor()
+          cur.execute("""
+              CREATE TABLE IF NOT EXISTS people (
+                  name TEXT PRIMARY KEY,
+                  eye_color TEXT,
+                  hair_color TEXT,
+                  weight REAL
+              )
+          """)
+
+          # Liste di possibili valori
+          names = [
+              "Alice", "Bob", ...
+          ]
+
+          eye_colors = ["blue", "green", "brown", "hazel", "gray"]
+          hair_colors = ["blonde", "brown", "black", "red", "gray"]
+
+          # Genera dati casuali
+          people_data = []
+          for name in names:
+              eye = random.choice(eye_colors)
+              hair = random.choice(hair_colors)
+              weight = round(random.uniform(50, 100), 1)  # peso tra 50 e 100 kg
+              people_data.append((name, eye, hair, weight))
+
+          # Inserisci i dati nel database
+          cur.executemany("""
+              INSERT OR REPLACE INTO people (name, eye_color, hair_color, weight)
+              VALUES (?, ?, ?, ?)
+              """, people_data)
+
+          conn.commit()
+        </code></pre>
+
+        <p>So, now I have my small db (the img below is only a part)</p>
+        <img src="./img/tabella.jpg" alt="Mia Immagine" style="width: 300px; height: 400px;">
+
+        <h4>Second step</h4>
+        <p>On this small db. the python script performs a univariate distribution for each K. It runs SQL queries to calculate the distribution and then, using matplotlib, shows the result.</p>
+
+        Distribution for eye_color in SQL ...
+        <pre><code>
+          #👁️ Distribuzione colori occhi
+          cur.execute("""
+              SELECT eye_color, COUNT(*)
+              FROM people
+              GROUP BY eye_color;
+          """)
+        </code></pre>
+
+        ... and then using matplotlib
+
+        <pre><code>
+          # Leggi tutti i dati
+          cur.execute("SELECT eye_color, hair_color, weight FROM people")
+          rows = cur.fetchall()
+
+          # Separiamo le colonne
+          eye_colors = [row[0] for row in rows]
+
+          # Distribuzione dei colori occhi
+          eye_distribution = Counter(eye_colors)
+          plt.figure(figsize=(6,4))
+          plt.bar(eye_distribution.keys(), eye_distribution.values(), color='skyblue')
+          plt.title("Distribuzione colori occhi")
+          plt.xlabel("Colore occhi")
+          plt.ylabel("Numero di persone")
+          plt.show()
+        </code></pre>
+
+        <img src="./img/eye_color.png" alt="Mia Immagine" >
+
+        <p>The same thing was done for hair_color distribution and weight distribution with the follow results</p>
+        <img src="./img/hair_color.png" alt="Mia Immagine" >
+        <img src="./img/wheight.png" alt="Mia Immagine" >
+    </section>
+    
+    <h2></h2>
+
+    <section class="intro">
+      <p>
+          <strong>Assignment 3 (for champion): </strong>
+          Bivariate
+      </p>
+    </section>
+
+    <h2></h2>
+
+    <section class="assignement">
+
+      <div class="assignement-description">
+        <p>
+          <strong>Assignment 4: </strong> Take a text and compute the distribution of the letters. Then apply a Ceaser Cipher, Now decode (using the "Language distribution") the encryption text assuming that you don't know the shift.
+        </p>
+      </div>
+
+      <div class="assignement-process">
+
+      </div>
+
+      <div class="assignement-result">
+        
+        <div class="container">
+        <h1>Analizzatore di Testo e Cifrario di Cesare</h1>
+        <p>Inserisci un testo e una chiave di cifratura per analizzare la distribuzione delle lettere.</p>
+
+        <textarea id="textInput" rows="8" placeholder="Scrivi o incolla il tuo testo qui..."></textarea>
+        
+        <div class="cipher-controls">
+            <label for="shiftKey">Chiave Cifrario di Cesare:</label>
+            <input type="number" id="shiftKey" value="3" min="1" max="25">
+        </div>
+        
+        <button id="analyzeButton">Analizza e Cifra</button>
+
+        <div class="charts-wrapper">
+          <h2>Testo Originale</h2>
+            <div class="chart-container">
+                
+                <canvas id="originalChart"></canvas>
+            </div>
+              <h2>Testo Cifrato</h2>
+            <div class="chart-container">
+                
+                <canvas id="cipherChart"></canvas>
+            </div>
+        </div>
+    </div>
+        
+        
+
+         
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p><a href="../../index.html">← Torna alla homepage</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
+  <script src="main.js"></script>
+</body>
+</html>
