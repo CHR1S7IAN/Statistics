@@ -1,3 +1,20 @@
+// Selezioniamo tutti gli elementi HTML
+const textInput = document.getElementById('textInput');
+const shiftKeyInput = document.getElementById('shiftKey');
+const analyzeButton = document.getElementById('analyzeButton');
+const originalCanvas = document.getElementById('originalChart');
+const exampleCanvas = document.getElementById('exampleChart');
+const example21Canvas = document.getElementById('examplePlainedChart');
+const example22Canvas = document.getElementById('exampleCipheredChart');
+const cipherCanvas = document.getElementById('cipherChart');
+
+// Istanze per i nostri due grafici
+let exampleChrartInstance = null;
+let example21ChrartInstance = null;
+let example22ChrartInstance = null;
+let originalChartInstance = null;
+let cipherChartInstance = null;
+
 /**
  * Trova la chiave del Cifrario di Cesare trovando lo shift che minimizza
  * la somma delle differenze al quadrato tra le due distribuzioni.
@@ -25,7 +42,7 @@ function findShiftKeyByMinDifference(originalFreq, cipherFreq) {
             currentDifference += Math.pow(freqOriginal - freqCipherShifted, 2);
         }
 
-        // 5. Se questa differenza è la più bassa trovata finora, salvala
+        // 5. Se questa differenza è la più bassa trovata finora, la salvo
         if (currentDifference < minDifference) {
             minDifference = currentDifference;
             bestShift = shift;
@@ -34,16 +51,6 @@ function findShiftKeyByMinDifference(originalFreq, cipherFreq) {
 
     return bestShift;
 }
-// Selezioniamo tutti gli elementi HTML
-const textInput = document.getElementById('textInput');
-const shiftKeyInput = document.getElementById('shiftKey');
-const analyzeButton = document.getElementById('analyzeButton');
-const originalCanvas = document.getElementById('originalChart');
-const cipherCanvas = document.getElementById('cipherChart');
-
-// Istanze per i nostri due grafici
-let originalChartInstance = null;
-let cipherChartInstance = null;
 
 // Funzione per applicare il Cifrario di Cesare
 function caesarCipher(text, shift) {
@@ -102,9 +109,42 @@ function drawChart(canvasElement, chartInstance, title, labels, data) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const exampleText = 'Hello World! My name is Christian';
+    const exampleFrequency = calculateFrequency(exampleText);
+    exampleChrartInstance = drawChart(
+    exampleCanvas, 
+    exampleChrartInstance, 
+    'Example text distribution', 
+    exampleFrequency.labels, 
+    exampleFrequency.data
+    );
+
+    example21ChrartInstance = drawChart(
+    example21Canvas, 
+    example21ChrartInstance, 
+    'Example plaintext distribution', 
+    exampleFrequency.labels, 
+    exampleFrequency.data
+    );
+
+    const cipheredText = caesarCipher(exampleText, 3);
+
+    const cipherFrequency = calculateFrequency(cipheredText);
+    example22ChrartInstance = drawChart(
+        example22Canvas, 
+        example22ChrartInstance, 
+        'Example ciphered text distribution', 
+        cipherFrequency.labels, 
+        cipherFrequency.data
+    );
+
+});
+
 // Evento principale al click del pulsante
 analyzeButton.addEventListener('click', () => {
-    // 1. Leggi gli input dell'utente
+    // 1. Legge gli input dell'utente
     const originalText = textInput.value.toLowerCase();
     const shiftKey = parseInt(shiftKeyInput.value) || 0;
 
@@ -137,76 +177,3 @@ analyzeButton.addEventListener('click', () => {
     // 6. Mostra il risultato all'utente
     document.getElementById('foundKeyResult').textContent = foundKey;
 });
-/*
-
-// Selezioniamo gli elementi HTML con cui dobbiamo interagire
-const textInput = document.getElementById('textInput');
-const analyzeButton = document.getElementById('analyzeButton');
-const chartCanvas = document.getElementById('originalChart');
-
-// Variabile per tenere traccia del grafico esistente
-let letterChartInstance = null;
-
-// Aggiungiamo un "ascoltatore di eventi" al pulsante
-analyzeButton.addEventListener('click', () => {
-    // 1. Ottieni il testo dalla textarea e convertilo in minuscolo
-    const text = textInput.value.toLowerCase();
-
-    // 2. Calcola la frequenza delle lettere (questa parte non cambia)
-    const letterCounts = {};
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-
-    for (const char of text) {
-        if (alphabet.includes(char)) {
-            letterCounts[char] = (letterCounts[char] || 0) + 1;
-        }
-    }
-
-    // --- MODIFICA PRINCIPALE QUI ---
-    // 3. Prepara i dati per TUTTE le lettere dell'alfabeto
-    
-    // Le etichette del nostro grafico saranno sempre l'intero alfabeto
-    const chartLabels = alphabet.split(''); // Crea un array: ['a', 'b', 'c', ...]
-
-    // Creiamo l'array dei dati. Per ogni lettera dell'alfabeto,
-    // cerchiamo il suo conteggio in letterCounts. Se non c'è, usiamo 0.
-    const chartData = chartLabels.map(letter => letterCounts[letter] || 0);
-
-    // 4. Disegna il grafico con i dati completi
-    drawChart(chartLabels, chartData);
-});
-
-function drawChart(labels, data) {
-    // Se esiste già un grafico, lo distruggiamo per non sovrapporlo
-    if (letterChartInstance) {
-        letterChartInstance.destroy();
-    }
-
-    const ctx = chartCanvas.getContext('2d');
-    letterChartInstance = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels, // Etichette sull'asse X (tutto l'alfabeto)
-            datasets: [{
-                label: 'Frequenza delle Lettere',
-                data: data, // Dati sull'asse Y (conteggi, inclusi gli zeri)
-                backgroundColor: 'rgba(26, 115, 232, 0.8)',
-                borderColor: 'rgba(26, 115, 232, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        // Mostra solo numeri interi sull'asse Y
-                        precision: 0
-                    }
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
-}*/

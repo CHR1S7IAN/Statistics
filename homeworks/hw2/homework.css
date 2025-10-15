@@ -1,0 +1,91 @@
+
+.simulator {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: var(--bg);
+}
+
+/* Il titolo del simulatore */
+.simulator h1 {
+  font-size: 1.6rem;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Stile per i controlli (textarea, input, button) */
+.simulator textarea {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.simulator .cipher-controls {
+  margin: 1rem 0;
+}
+
+.simulator input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  margin-left: 10px;
+  text-align: center;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.simulator button {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 10px 25px;
+  font-size: 1rem;
+  background: var(--accent);
+  color: var(--card-bg);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.simulator button:hover {
+  transform: translateY(-2px);
+  background: #005f9e; /* Un blu leggermente più scuro al passaggio del mouse */
+}
+/* Se si usa il tema scuro, si può cambiare questo colore */
+body.dark .simulator button:hover {
+  background: #64d1ff;
+}
+
+
+
+/* Stile per il risultato della decodifica */
+.result-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.result-container h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--accent);
+}
+
+#foundKeyResult {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.5rem;
+  color: #28a745; /* Un verde per indicare successo */
+}
+
+body.dark #foundKeyResult {
+  color: #33ff66;
+}

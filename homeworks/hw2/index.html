@@ -6,6 +6,7 @@
   <title>Homework 2</title>
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/homework.css">
+  <link rel="stylesheet" href="./homework.css">
 </head>
 
 <body class="homework-page">
@@ -15,7 +16,7 @@
 
   <main>
     <!-- intro -->
-    <section class="intro">
+    <section class="homeworkHeader">
       <h2>Homework 2</h2>
       <p><strong>Deadline:</strong> 2025-10-16</p>
     </section>
@@ -30,25 +31,17 @@
       <div class="assignement-result">
         <h4>Concept of Dataset</h4>
           <p>
-            A <strong>dataset</strong> is a collection of data points organized in a structured form,
-            often as a table with rows (observations) and columns (variables).
-            Each row represents an individual record, and each column represents a feature or attribute.
-            For example, a dataset of students might include their names, ages, and grades.
+            A <strong>dataset</strong> is a collection of data points organized in a structured form, often as a table with rows (observations) and columns (variables). Each row represents an individual record, and each column represents a feature or attribute. For example, a dataset of students might include their names, ages, and grades.
           </p>
 
         <h4>Concept of Distribution</h4>
           <p>
-              A <strong>distribution</strong> describes how values of a variable are spread out —
-              that is, the pattern or frequency with which different values occur.
-              It shows whether the data are clustered around certain values, evenly spread, or skewed.
+              A <strong>distribution</strong> describes how values of a variable are spread out — that is, the pattern or frequency with which different values occur. It shows whether the data are clustered around certain values, evenly spread, or skewed.
           </p>
 
         <h4>Relationship Between Dataset and Distribution</h4>
           <p>
-              A dataset is the actual sample of data collected, while a distribution is the
-              underlying pattern that the dataset represents.
-              In other words, the dataset is what you have;
-              the distribution is how those values are arranged or behave statistically.
+              A dataset is the actual sample of data collected, while a distribution is the underlying pattern that the dataset represents. In other words, the dataset is what you have; the distribution is how those values are arranged or behave statistically.
           </p>
       </div>
     
@@ -112,7 +105,7 @@
 
         <p>So, now I have my small db (the img below is only a part)</p>
         <figure class="gallery-item">
-          <img src="./img/tabella.jpg" alt="Mia Immagine" style="max-width: 300px; height: auto;">
+          <img src="./img/tabella.jpg" alt="db image" style="max-width: 300px; height: auto;">
           <figcaption>Some rows of small local db</figcaption>
         </figure>
         
@@ -133,11 +126,11 @@
         ... and then using matplotlib
 
         <pre><code>
-          # Leggi tutti i dati
+          # Legge tutti i dati
           cur.execute("SELECT eye_color, hair_color, weight FROM people")
           rows = cur.fetchall()
 
-          # Separiamo le colonne
+          # Separa le colonne
           eye_colors = [row[0] for row in rows]
 
           # Distribuzione dei colori occhi
@@ -180,18 +173,39 @@
       <div class="assignement-description">
         <p>
           <strong>Assignment 3 (for champion): </strong>
-          Bivariate
+          With the small dataset of assignment 2, compute bivariate distribution.
         </p>
       </div>
 
       <div class="assignement-process">
-
+        <p>
+          For this assignment, we will consider bivariate distribuition on eye_color and hair_color. 
+        </p>
+        <p>
+          Like in assignment 2, we use python script with sqlite. In particular, in order to process bivariate distribution on eye_color e hair_color, we use the function below. 
+        </p>
+        <pre><code>
+          # bivariate distribution on eye_color, hair_color
+          query = """
+              SELECT eye_color, hair_color, COUNT(*) AS count
+              FROM people GROUP BY eye_color, hair_color ORDER BY eye_color, hair_color;
+          """
+          cur.execute(query)
+        </code></pre>
+    
       </div>
       
       <div class="assignement-result">
+        <p>
+          As the assignment 2, using matplotlib we can see te result (fig below).
+        </p>
 
+        <figure class="gallery-item">
+          <img src="./img/bivariate.png" alt="Bivariate distribution">
+          <figcaption>Some rows of small local db</figcaption>
+        </figure>
       </div>
-      
+
     </section>
 
     <!-- assignment 4 -->
@@ -204,38 +218,159 @@
       </div>
 
       <div class="assignement-process">
+        <!-- step 1 -->
+        <div class="step">
+          <h1>First step</h1>
+          <p>
+            For this assignement javascript has been used. In particular, for this step, given a plaintext, with a js function (see below), the function process the distribution of the letters in that text.
+          </p>
+          <pre><code>
+            function calculateFrequency(text) {
+                const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+                const letterCounts = {};
+                for (const char of text) {
+                    if (alphabet.includes(char)) {
+                        letterCounts[char] = (letterCounts[char] || 0) + 1;
+                    }
+                }
+                const chartLabels = alphabet.split('');
+                const chartData = chartLabels.map(letter => letterCounts[letter] || 0);
+                return { labels: chartLabels, data: chartData };
+            }
+          </code></pre>
+          <p>
+            Then, thanks to Chart.js library, we get the distribution chart. Below an example.
+          </p>
+          <div id="exampleBoxChart">
+            <p>
+              <strong>example text: </strong>Hello World! My name is Christian
+            </p>
+            <div class="chart-container">
+              <canvas id="exampleChart"></canvas>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- step 2 -->
+        <div class="step">
+          
+          <h1>Second step</h1>
+
+          <p>
+            In this step, given a shift key, with a js funtion (see below), we process the plaintext in order to apply Ceaser Ciphrer...
+          </p>  
+
+          <pre><code>
+            function caesarCipher(text, shift) {
+                const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+                let cipheredText = '';
+
+                for (const char of text) {
+                    const index = alphabet.indexOf(char);
+                    if (index !== -1) { 
+                        const newIndex = (index + shift) % 26;
+                        cipheredText += alphabet[newIndex];
+                    } else { 
+                        cipheredText += char;
+                    }
+                }
+                return cipheredText;
+            }
+          </code></pre>
+
+          <p>
+            ... and then compute the distribution again. Below the complete example (with shift key = 3).
+          </p>
+          <div id="example2BoxChart">
+            <p>
+              <strong>example text: </strong>Hello World! My name is Christian
+            </p>
+            <div class="chart-container">
+              <canvas id="examplePlainedChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <canvas id="exampleCipheredChart"></canvas>
+            </div>
+          </div>
+
+        </div>
+      
+        <!-- step 3 -->
+        <div class="step">
+
+          <h1>Third step</h1>
+
+          <p>
+            Now we have to try to find the shift key, so we can decode the cipher text!. Obviously, we assume that we don't know the key, but we know each the distributions (plain and cipher text). 
+          </p>
+          <p>
+            The ide: <strong>Matching the Shapes</strong>
+          </p>
+          <p>
+            The two distributions (the bar charts) are two silhouettes or mountain profiles. One is the original shape, the other is the same shape but shifted sideways. So, for each position, we measure how much the two shapes overlap or differ. The position where the two silhouettes match almost perfectly — that is, where the total difference between their heights is minimal — reveals the encryption key. Below the js function. 
+          </p>
+          <pre><code>
+            function findShiftKeyByMinDifference(originalFreq, cipherFreq) {
+                let bestShift = 0;
+                let minDifference = Infinity;
+
+                for (let shift = 0; shift < 26; shift++) {
+                    let currentDifference = 0;
+
+                    for (let i = 0; i < 26; i++) {
+                        
+                        const shiftedIndex = (i + shift) % 26;
+                        
+                        const freqOriginal = originalFreq[i];
+                        const freqCipherShifted = cipherFreq[shiftedIndex];
+
+                        currentDifference += Math.pow(freqOriginal - freqCipherShifted, 2);
+                    }
+
+                    if (currentDifference < minDifference) {
+                        minDifference = currentDifference;
+                        bestShift = shift;
+                    }
+                }
+
+                return bestShift;
+            }
+          </code></pre>
+        </div>
 
       </div>
+
 
       <div class="assignement-result">
         
         <div class="simulator">
-          <h1>Analizzatore di Testo e Cifrario di Cesare</h1>
-          <p>Inserisci un testo e una chiave di cifratura per analizzare la distribuzione delle lettere.</p>
+          <h1>Simulator</h1>
+          <p>Enter a text and an encryption key to analyze the distribution of letters.</p>
 
           <textarea id="textInput" rows="8" placeholder="Scrivi o incolla il tuo testo qui...">Era un vecchio che pescava da solo in una barca nella Corrente del Golfo, e da ottantaquattro giorni non prendeva un pesce. Nei primi quaranta giorni un ragazzo era stato con lui. Ma dopo quaranta giorni senza una sola preda, i genitori del ragazzo gli avevano detto che il vecchio era definitivamente e irrimediabilmente “salao”, cioè il più sfortunato fra gli uomini; e il ragazzo, obbedendo, era andato su un’altra barca che aveva preso tre pesci grossi nella prima settimana. Il ragazzo si rattristava ogni volta che vedeva il vecchio tornare colla barca vuota, e ogni sera scendeva ad aiutarlo a portare le lenze arrotolate o la vela che era rattoppata con sacchi di farina e arrotolata assomigliava alla bandiera della sconfitta perenne.</textarea>
         
           <div class="cipher-controls">
-              <label for="shiftKey">Chiave Cifrario di Cesare:</label>
+              <label for="shiftKey">Shift key:</label>
               <input type="number" id="shiftKey" value="3" min="1" max="25">
           </div>
           
-          <button id="analyzeButton">Analizza e Cifra</button>
+          <button id="analyzeButton">Process</button>
 
           <div class="charts-wrapper">
-            <h2>Testo Originale</h2>
+            <h3>Distribution of plaintext</h3>
             <div class="chart-container">  
               <canvas id="originalChart"></canvas>
             </div>
-            <h2>Testo Cifrato</h2>
+            <h3>Distribution of ciphertext</h3>
             <div class="chart-container">
               <canvas id="cipherChart"></canvas>
             </div>
           </div>
 
           <div class="result-container">
-            <h3>Risultato Decodifica</h3>
-            <p>La chiave più probabile trovata è: <strong id="foundKeyResult">-</strong></p>
+            <h3>Hack the key</h3>
+            <p>Shift key used to encrypt: <strong id="foundKeyResult">-</strong></p>
           </div>
 
         </div>

@@ -48,63 +48,6 @@ def populate_database_if_empty(cur, conn):
 
     conn.commit()
 
-'''
-# Leggi e mostra i dati
-cur.execute("SELECT * FROM people")
-rows = cur.fetchall()
-
-print("Elenco persone nel database:\n")
-for row in rows:
-    print(f"Nome: {row[0]:<10} | Occhi: {row[1]:<6} | Capelli: {row[2]:<6} | Peso: {row[3]} kg")
-
-# Chiudi
-cur.close()
-conn.close()
-
-# Connessione al database
-conn = sqlite3.connect("people_db.sqlite")
-cur = conn.cursor()
-'''
-
-'''
-# Leggi tutti i dati
-cur.execute("SELECT eye_color, hair_color, weight FROM people")
-rows = cur.fetchall()
-
-# Separiamo le colonne
-eye_colors = [row[0] for row in rows]
-hair_colors = [row[1] for row in rows]
-weights = [row[2] for row in rows]
-
-# Distribuzione dei colori occhi
-eye_distribution = Counter(eye_colors)
-print("👁️ Distribuzione colori occhi:")
-for color, count in eye_distribution.items():
-    print(f"{color}: {count}")
-
-# Distribuzione dei colori capelli
-hair_distribution = Counter(hair_colors)
-print("\n💇 Distribuzione colori capelli:")
-for color, count in hair_distribution.items():
-    print(f"{color}: {count}")
-
-# Definisci categorie di peso
-def categorize_weight(w):
-    if w < 60:
-        return "Sottopeso"
-    elif w < 80:
-        return "Normopeso"
-    else:
-        return "Sovrappeso"
-
-weight_categories = [categorize_weight(w) for w in weights]
-weight_distribution = Counter(weight_categories)
-
-print("⚖️ Distribuzione del peso per categorie:")
-for category, count in weight_distribution.items():
-    print(f"{category}: {count} persone")
-'''
-
 def analyze_data(cur):
     # 1. Distribuzione dei colori occhi con SQL
     print("👁️ Distribuzione colori occhi:")
@@ -193,11 +136,8 @@ def plot_data(cur):
     plt.show()
 
 def plot_eye_hair_relationship(cur):
-    """
-    Crea un grafico a barre raggruppato più leggibile e professionale.
-    """
-    print("\n--- Creazione Grafico Bivariato Migliorato ---")
     
+    # bivariate distribution on eye_color, hair_color
     query = """
         SELECT eye_color, hair_color, COUNT(*) AS count
         FROM people GROUP BY eye_color, hair_color ORDER BY eye_color, hair_color;
@@ -218,8 +158,6 @@ def plot_eye_hair_relationship(cur):
 
     eye_colors = list(data.keys())
     hair_colors = sorted(list(set(hc for ec_data in data.values() for hc in ec_data.keys())))
-    
-    # --- MODIFICHE PRINCIPALI QUI ---
     
     # 2. Prepara le posizioni e le larghezze delle barre
     x = np.arange(len(eye_colors))  # Le posizioni dei GRUPPI sull'asse X
@@ -253,8 +191,8 @@ def plot_eye_hair_relationship(cur):
     plt.show()
 
 def main():
-    """Funzione principale che esegue l'intero script."""
-    conn = None # Inizializziamo la connessione a None
+    # Inizializziamo la connessione a None
+    conn = None 
     try:
         # Passaggio 1: Connessione al DB
         conn, cur = connect_to_db()
