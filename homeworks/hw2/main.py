@@ -3,10 +3,16 @@ import random
 from collections import Counter
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 def connect_to_db():
+    # 1. Trova il percorso assoluto della cartella in cui si trova questo script.
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # 2. Unisci il percorso della cartella con il nome del file del database.
+    db_path = os.path.join(script_dir, "people_db.sqlite")
     # Connessione (crea il file se non esiste)
-    conn = sqlite3.connect("people_db.sqlite")
+    conn = sqlite3.connect(db_path)
     cur = conn.cursor()
     return conn, cur
 
