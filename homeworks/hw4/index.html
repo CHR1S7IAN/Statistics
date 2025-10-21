@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/homework.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="main.js" defer></script> 
+    
+  <title>Homework 4</title>
+</head>
+
+<body class="homework-page">
+
+    <header>
+        <h1><a href="../../index.html">← Portfolio Homework</a></h1>
+    </header>
+
+    <main>
+
+        <!-- intro -->
+        <section class="homeworkHeader">
+            <h2>Homework 4</h2>
+            <p><strong>Deadline:</strong> 2025-10-30</p>
+        </section>
+
+        <!-- assignment -->
+        <section class="assignement">
+
+            <div class="assignement-description">
+                <p>
+                    <strong>Assignement 1</strong>
+                    Explain the meaning of "converge" used in "the frequency converges to the probability...". 
+                </p>
+            </div>
+
+            <div class="assignement-process">
+
+                <h4>When Frequency Meets Probability</h4>
+
+                <p> 
+                    In statistics and probability, when we say that "the frequency converges to the probability," we are referring to a specific concept of convergence formalized by a fundamental theorem: the Law of Large Numbers. It is not a different type of convergence from mathematical convergence, but rather a specific application of mathematical convergence to the world of random variables.
+                </p>
+
+                <p>
+                    <ul>
+                        <li>
+                            <strong>Simple Definition:</strong> This theorem states that if you repeat a random experiment (like flipping a coin) a very large number of times, the relative frequency of an event (e.g., the percentage of times it came up "heads") will get closer and closer to its theoretical probability (50%, or 0.5, for a fair coin).
+                        </li>
+                        <li>
+                            <strong>Convergence:</strong> The term "converge" means exactly this: as the number of trials (n) increases, the difference between the observed relative frequency (f_n) and the theoretical probability (p) becomes smaller and smaller, tending to zero.
+                        </li>
+                    </ul>
+                     
+                </p>
+
+                <p>
+                    This is the important distinction. It is not the same convergence as a simple numerical sequence (like 1/n converging to 0), but a stochastic convergence (or "in probability").
+                </p>
+                
+            </div>
+
+            <div class="assignement-result"> 
+                
+            </div>
+
+        </section>
+
+        <!-- assignment -->
+        <section class="assignement">
+
+            <div class="assignement-description">
+
+                <p>
+                    <strong>Assignment 2</strong>
+                    Give a representation of "The law of large number" (strictly related to the statement "frequency converges to the probability").
+                </p>
+
+            </div>
+
+            <div class="assignement-process">
+                <p>
+                    <h4>Experiment</h4>
+                    We want to provide a representation of the Law of Large Numbers by showing on a graph the trend of the score obtained by flipping a (fair) coin. Specifically, the x-axis of the graph shows the flips performed, and the y-axis shows the score (which starts from zero and is incremented every time heads comes up, and remains unchanged every time tails comes up). A line on the graph represents the trend of the score. This line will be a simulation. 
+                </p>
+            </div>
+
+            <div class="assignement-result">
+
+                <p>
+                    Below a representation of a single simulation with 50 flip of regluar coin.
+                </p>
+                
+                <div class="chart-container">  
+                    <canvas id="chartOneSimulation"></canvas>
+                </div>
+
+                <p>
+                    As you can see, not always the final score will be 25 (half of maximum score) (try to reload the page for see different result) because of the inherent randomness (or 'chance') present in each individual flip.To elaborate: The 50% (or 1/2) probability is a long-term theoretical average, also known as the expected value (which is 25). It does not guarantee that you will get exactly 25 heads in any single set of 50 flips. Each flip is an independent, random event. Chance will almost always cause the final score to fluctuate around 25 (e.g., 23, 27, 25, 24...). This natural deviation from the expected value is called statistical variance.
+                </p>
+
+                <p>
+                    Now try to add more simulations (50). Here the result.
+                </p>
+
+                <div class="chart-container">  
+                    <canvas id="chart50Simulation"></canvas>
+                </div>
+
+                <p>
+                    As we can see, the result of most simulations <strong>"converge"</strong> to the probability of flipping a regular coin.
+                </p>
+
+                <p>
+                    Let's see an example with the distribution over the 500 simulations:
+                </p>
+
+                <div class="charts-container">  
+
+                    <div class="chart-box-left">
+                        <canvas id="chart500SimulationWD"></canvas>
+                    </div>
+
+                    <div class="chart-box-right">
+                        <canvas id="chart500Distribution"></canvas>
+                    </div>
+
+                </div>
+
+                <p>
+                    Just for having a visual result of how distribution "moves", below an example, with 50 trials and 500 simulations, where the coin is not fair. In fact, with a probability of 90% heads comes up, and with a probability of 10% tails comes up.
+                </p>
+
+                <div class="charts-container">  
+
+                    <div class="chart-box-left">
+                        <canvas id="chart500SimulationWDTruccato"></canvas>
+                    </div>
+
+                    <div class="chart-box-right">
+                        <canvas id="chart500DistributionTruccato"></canvas>
+                    </div>
+
+                </div>
+
+
+                <div class="simulatore">
+                    <hr style="margin: 40px 0;">
+
+                    <h2>Simulatore Interattivo</h2>
+                    <p>
+                        Insert the number of trials and the number of simulations, then click on "Esegui simulazione" to generate the graph.
+                    </p>
+
+                    <div class="controls-container" style="padding: 15px; background-color: #f4f4f4; border-radius: 8px; margin-bottom: 10px;">
+                        <label for="inputInteractiveTrials">Numero di Lanci:</label>
+                        <input type="number" id="inputInteractiveTrials" value="50" min="1" style="width: 80px;">
+
+                        <label for="inputInteractiveSims" style="margin-left: 20px;">Numero di Simulazioni:</label>
+                        <input type="number" id="inputInteractiveSims" value="10" min="1" style="width: 80px;">
+
+                        <label for="inputInteractiveProb" style="margin-left: 20px;">Probabilità:</label>
+                        <input type="number" id="inputInteractiveProb" value="50" min="1" max="100" style="width: 80px;">
+
+                        <button id="btnInteractiveRun" style="margin-left: 20px;">Esegui Simulazione</button>
+                    </div>
+
+                    <div class="charts-container">  
+                        <div class="chart-box-left">
+                            <canvas id="chartInteractiveSimulation"></canvas>
+                        </div>
+                        <div class="chart-box-right">
+                            <canvas id="chartInteractiveDistribution"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+
+        </section>
+    </main>
+    
+</body>
+
+</html>
