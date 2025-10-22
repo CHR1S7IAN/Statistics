@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/homework.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="main.js"></script>
+
+    <title>Homework 3</title>
+</head>
+<body class="homework-page">
+
+    <header>
+        <h1><a href="../../index.html">← Portfolio Homework</a></h1>
+    </header>
+
+    <main>
+
+        <!-- intro -->
+        <section class="homeworkHeader">
+            <h2>Homework 3</h2>
+            <p><strong>Deadline:</strong> 2025-10-23</p>
+        </section>
+
+        <!-- assignment -->
+        <section class="assignement">
+
+            <div class="assignement-description">
+                
+                <p>
+                    <strong>Assignment</strong>
+                    Take a text and apply RSA letter by letter. Then calculate the distribution and, by assuming that the original text is in Italian, try to decode it using frequency analysis.
+                </p>
+
+            </div>
+
+            <div class="assignement-process">
+
+                <p>
+                    <h4>What is RSA?</h4>
+                    The operation of RSA is based on a mathematical principle: it is very easy to multiply two very large prime numbers together, but it is extremely difficult (almost impossible with current technology) to do the opposite, which is to factor the resulting number to find the two original prime numbers.
+                </p>
+                <p>
+                    <h4>Basic Operation</h4>
+                    <p>
+                        RSA is based on the high computational complexity of prime factorization. Its basic operation is as follows:
+                    </p>
+
+                    <ul>
+                        <li>
+                            two prime numbers, <i>p</i> and <i>q</i>, are randomly chosen, large enough to guarantee the algorithm's security;
+                        </li>
+                        <li>
+                            their product <i>n</i> = <i>pq</i>, called the modulus (since all subsequent arithmetic is modulo <i>n</i>), and the product &varphi;(<i>n</i>) = (<i>p</i> &minus; 1)(<i>q</i> &minus; 1), where &varphi;(<i>n</i>) is the totient function, are calculated;
+                        </li>
+                        <li>
+                            the factorization of <i>n</i> is kept secret and is known only by the person who chose the two prime numbers, <i>p</i> and <i>q</i>;
+                        </li>
+                        <li>
+                            a number <i>e</i> (called the public exponent) is then chosen, which is coprime with &varphi;(<i>n</i>) and smaller than &varphi;(<i>n</i>);
+                        </li>
+                        <li>
+                            the number <i>d</i> (called the private exponent) is calculated such that its product with <i>e</i> is congruent to 1 modulo &varphi;(<i>n</i>), meaning <i>ed</i> &equiv; 1 (mod &varphi;(<i>n</i>)); the extended Euclidean algorithm is used to calculate <i>d</i>.
+                        </li>
+                    </ul>
+
+                    <p>The public key is (<i>n</i>, <i>e</i>), while the private key is (<i>n</i>, <i>d</i>).</p>
+
+                    <p>The strength of the algorithm lies in the fact that to calculate <i>d</i> from <i>e</i> (or vice versa), knowing <i>n</i> is not enough; one needs the number &varphi;(<i>n</i>) = (<i>p</i> &minus; 1)(<i>q</i> &minus; 1), and its calculation takes a very long time. In fact, prime factorization (i.e., breaking a number down into its prime divisors) is a computationally expensive operation.</p>
+
+                    <p>A message <i>m</i> is encrypted through the operation <i>m</i><sup><i>e</i></sup> (mod <i>n</i>), transforming it into the ciphertext <i>c</i>. Once transmitted, <i>c</i> is decrypted with <i>c</i><sup><i>d</i></sup> (mod <i>n</i>) = <i>m</i>. The process only works if <i>m</i> &lt; <i>n</i> and the key <i>e</i> used for encryption and the key <i>d</i> used for decryption are linked by the relation <i>ed</i> &equiv; 1 (mod &varphi;(<i>n</i>)). Therefore, when a message is encrypted with one of the two keys, it can only be decrypted using the other. The algorithm is based on the unproven assumption (known as the RSA assumption) that the problem of calculating <sup><i>e</i></sup>&radic;<i>c</i> mod <i>n</i>, where <i>n</i> is a composite number whose factors are unknown, is computationally intractable.</p>
+
+                    <p>
+                        By definition, the encryption of M is:
+                        <p style="text-align: center;">
+                            c = m<sup>e</sup> (mod n)
+                        </p>
+
+                        The decryption:
+                        <p style="text-align: center;">
+                            m = c<sup>d</sup> (mod n)
+                        </p>
+                    </p>
+                </p>
+
+                <p> <h4>Implementation</h4> For <strong>simplicity</strong>, we will work with <strong>small numbers</strong> since security is not a <strong>requirement</strong>.
+
+                <ul>
+                    <li>
+                        As in a real case, we first choose <i>e</i>. We choose it to be prime so that to be coprime with &varphi;(<i>n</i>), we just need to ensure that &varphi;(<i>n</i>) is not a multiple of it.
+                        <p style="text-align: center;"><i>e</i> = 3</p>
+                    </li>
+                    <li>
+                        Now, we would need to generate two random prime numbers and verify that &varphi;(<i>n</i>) is not a multiple of e. For simplicity, we set <i>p</i> and <i>q</i> such that &varphi;(<i>n</i>) is not a multiple of 3.
+                        <p style="text-align: center;"><i>p</i> = 11</p>
+                        <p style="text-align: center;"><i>q</i> = 17</p>
+                        <p style="text-align: center;"><i>n</i> = <i>pq</i> = 11 x 17 = 187</p>
+                        <p style="text-align: center;">&varphi;(<i>n</i>) = <i>(p-1)(q-1)</i> = (11-1)(17-1) = 10 x 16 = 160</p>
+                        (160 is not a multiple of 3, so our choice of e=3 is valid).
+                    </li>
+                    <li>
+                        Now let's calculate <i>d</i>. By definition:
+                        
+                        <p style="text-align: center;"><i>ed</i> &equiv; 1 (mod &varphi;(<i>n</i>))</p>
+
+                        <p style="text-align: center;"><i>3 x d</i> &equiv; 1 (mod 160)</p>
+
+                        This means we need to find a number d such that 3×d divided by 160 gives a remainder of 1. We solve this equation using the Extended Euclidean Algorithm.
+
+                        <p>We are looking for <var>d</var> (and another number <var>k</var>) that solves the equation: 3<var>d</var> + 160<var>k</var> = 1</p>
+
+                        <h5>Phase A: Euclidean Algorithm (to find the GCD)</h5>
+                        <p>We apply the standard algorithm for GCD(160, 3):</p>
+                        <ul>
+                            <li>160 = 53 &times; 3 + 1</li>
+                            <li>3 = 3 &times; 1 + 0</li>
+                        </ul>
+                        <p>The GCD is 1 (the last non-zero remainder), as we expected.</p>
+
+
+                        <h5>Phase B: Extended Algorithm (to find <var>d</var>)</h5>
+                        <p>Now we work backward, starting from the equation before the 0: <code>160 = 53 &times; 3 + 1</code></p>
+                        <p>We rearrange the equation to isolate the remainder (1): <code>1 = 160 &minus; (53 &times; 3)</code></p>
+                        <p>We want to write it in the form <code>3<var>d</var> + 160<var>k</var> = 1</code>. We rearrange again: <code>1 = (160 &times; 1) + (3 &times; &minus;53)</code></p>
+                        <p>Comparing this with <code>3<var>d</var> + 160<var>k</var> = 1</code>, we found our values:</p>
+                        <ul>
+                            <li><var>k</var> = 1</li>
+                            <li><var>d</var> = &minus;53</li>
+                        </ul>
+
+                        <h5>Phase C: Finding a positive <var>d</var></h5>
+                        <p>We found <var>d</var> = &minus;53. This is mathematically correct (in fact 3 &times; &minus;53 = &minus;159, and &minus;159 (mod 160) gives a remainder of 1), but for the private key, we need a positive number.</p>
+                        <p>To find the positive equivalent, we just add the modulus &varphi;(<var>n</var>) to the negative result: <var>d</var> = &minus;53 + 160<br>
+                        <strong><var>d</var> = 107</strong>
+                        </p>
+
+                        <h5>4. Verification and Summary</h5>
+                        <p>Let's verify if <var>d</var> = 107 is correct: <var>e</var> &times; <var>d</var> &equiv; 1 (mod &varphi;(<var>n</var>))<br>
+                        3 &times; 107 &equiv; 1 (mod 160)<br>
+                        321 &equiv; 1 (mod 160)
+                        </p>
+                        <p>We divide 321 by 160: 321 &divide; 160 = 2 with <strong>remainder 1</strong>.</p>
+                        
+                        <p><strong>Key Summary:</strong></p>
+                        <ul>
+                            <li>Public Key (<var>n</var>, <var>e</var>): (187, 3)</li>
+                            <li>Private Key (<var>n</var>, <var>d</var>): (187, 107)</li>
+                        </ul>
+
+                    </li>
+                </ul>
+                </p>
+
+                <p>
+                    <h4>Letter-by-Letter Encryption</h4>
+                    Given an Italian text, we calculate the distribution of its letters as done in homework 2.
+
+                    <div class="boxTextDistribution">
+                        <div class="boxText" id="textBox">
+                Nel mezzo del cammin di nostra vita
+                mi ritrovai per una selva oscura,
+                ché la diritta via era smarrita.
+                Ahi quanto a dir qual era è cosa dura
+                esta selva selvaggia e aspra e forte
+                che nel pensier rinova la paura!
+                Tant’è amara che poco è più morte;
+                ma per trattar del ben ch’i’ vi trovai,
+                dirò de l’altre cose ch’i’ v’ho scorte.
+                Io non so ben ridir com’i’ v’intrai,
+                tant’era pien di sonno a quel punto
+                che la verace via abbandonai.
+                Ma poi ch’i’ fui al piè d’un colle giunto,
+                là dove terminava quella valle
+                che m’avea di paura il cor compunto,
+                guardai in alto e vidi le sue spalle
+                vestite già de’ raggi del pianeta
+                che mena dritto altrui per ogne calle.
+                Allor fu la paura un poco queta
+                che nel lago del cor m’era durata
+                la notte ch’i’ passai con tanta pieta.
+                E come quei che con lena affannata,
+                uscito fuor del pelago a la riva,
+                si volge a l’acqua perigliosa e guata,
+                così l’animo mio, ch’ancor fuggiva,
+                si volse a retro a rimirar lo passo
+                che non lasciò già mai persona viva.
+                Poi ch’èi posato un poco il corpo lasso,
+                ripresi via per la piaggia diserta,
+                sì che ’l piè fermo sempre era ’l più basso.
+                Ed ecco, quasi al cominciar de l’erta,
+                una lonza leggiera e presta molto,
+                che di pel macolato era coverta;
+                e non mi si partia dinanzi al volto,
+                anzi ’mpediva tanto il mio cammino,
+                ch’i’ fui per ritornar più volte vòlto.
+                Temp’era dal principio del mattino,
+                e ’l sol montava ’n sù con quelle stelle
+                ch’eran con lui quando l’amor divino
+                mosse di prima quelle cose belle;
+                sì ch’a bene sperar m’era cagione
+                di quella fiera a la gaetta pelle
+                l’ora del tempo e la dolce stagione;
+                ma non sì che paura non mi desse
+                la vista che m’apparve d’un leone.
+                Questi parea che contra me venisse
+                con la test’alta e con rabbiosa fame,
+                sì che parea che l’aere ne tremesse.
+                Ed una lupa, che di tutte brame
+                sembiava carca ne la sua magrezza,
+                e molte genti fé già viver grame,
+                questa mi porse tanto di gravezza
+                con la paura ch’uscia di sua vista,
+                ch’io perdei la speranza de l’altezza.
+                E qual è quei che volontieri acquista,
+                e giugne ’l tempo che perder lo face,
+                che ’n tutti suoi pensier piange e s’attrista;
+                tal mi fece la bestia sanza pace,
+                che, venendomi ’ncontro, a poco a poco
+                mi ripigneva là dove ’l sol tace.
+                Mentre ch’i’ rovinava in basso loco,
+                dinanzi a li occhi mi si fu offerto
+                chi per lungo silenzio parea fioco.
+                Quando vidi costui nel gran diserto,
+                “Miserere di me”, gridai a lui,
+                “qual che tu sii, od ombra od omo certo!”.
+                Rispuosemi: “Non omo, omo già fui,
+                e li parenti miei furon lombardi,
+                mantoani per patrïa ambedui.
+                Nacqui sub Iulio, ancor che fosse tardi,
+                e vissi a Roma sotto ’l buono Augusto
+                nel tempo de li dèi falsi e bugiardi.
+                Poeta fui, e cantai di quel giusto
+                figliuol d’Anchise che venne di Troia,
+                poi che ’l superbo Ilïón fu combusto.
+                Ma tu perché ritorni a tanta noia?
+                perché non sali il dilettoso monte
+                ch’è principio e cagion di tutta gioia?”.
+                “Or se’ tu quel Virgilio e quella fonte
+                che spandi di parlar sì largo fiume?”,
+                rispuos’io lui con vergognosa fronte.
+                “O de li altri poeti onore e lume,
+                vagliami ’l lungo studio e ’l grande amore
+                che m’ha fatto cercar lo tuo volume.
+                Tu se’ lo mio maestro e ’l mio autore,
+                tu se’ solo colui da cu’ io tolsi
+                lo bello stilo che m’ha fatto onore.
+                Vedi la bestia per cu’ io mi volsi;
+                aiutami da lei, famoso saggio,
+                ch’ella mi fa tremar le vene e i polsi.”
+                “A te convien tenere altro vïaggio,”
+                rispuose, poi che lagrimar mi vide,
+                “se vuo’ campar d’esto loco selvaggio;
+                ché questa bestia, per la qual tu gride,
+                non lascia altrui passar per la sua via,
+                ma tanto lo ’mpedisce che l’uccide;
+                e ha natura sì malvagia e ria,
+                che mai non empie la bramosa voglia,
+                e dopo ’l pasto ha più fame che pria.
+                Molti son li animali a cui s’ammoglia,
+                e più saranno ancora, infin che ’l veltro
+                verrà, che la farà morir con doglia.
+                Questi non ciberà terra né peltro,
+                ma sapïenza, amore e virtute,
+                e sua nazion sarà tra feltro e feltro.
+                Di quella umile Italia fia salute
+                per cui morì la vergine Cammilla,
+                Eurialo e Turno e Niso di ferute.
+                Questi la caccerà per ogne villa,
+                fin che l’avrà rimessa ne lo ’nferno,
+                là onde ’nvidia prima dipartilla.
+                Ond’io per lo tuo me’ penso e discerno
+                che tu mi segui, e io sarò tua guida,
+                e trarrotti di qui per loco etterno,
+                ove udirai le disperate strida,
+                vedrai li antichi spiriti dolenti,
+                che la seconda morte ciascun grida;
+                e vederai color che son contenti
+                nel foco, perché speran di venire
+                quando che sia a le beate genti.
+                A le quai poi se tu vorrai salire,
+                anima fia a ciò più di me degna:
+                con lei ti lascerò nel mio partire;
+                ché quello imperador che là sù regna,
+                perch’i’ fu’ ribellante a la sua legge,
+                non vuol che ’n sua città per me si vegna.
+                In tutte parti impera e quivi regge;
+                quivi è la sua città e l’alto seggio:
+                oh felice colui cu’ ivi elegge!”.
+                E io a lui: “Poeta, io ti richeggio
+                per quello Dio che tu non conoscesti,
+                acciò ch’io fugga questo male e peggio,
+                che tu mi meni là dov’or dicesti,
+                sì ch’io veggia la porta di san Pietro
+                e color cui tu fai cotanto mesti”.
+                Allor si mosse, e io li tenni dietro.
+                    
+                        </div>
+
+                        <div class="boxDistribution">
+                            <canvas id="chartPlainLetter"></canvas>
+                        </div>
+                    </div>
+
+                    <p>Now, since we will be applying RSA, let's map the letters of the alphabet to their corresponding ASCII numbers (a=97, b=98...) and observe the distribution (it obviously doesn't change, this is just for visual context)</p>
+
+                    <div class="boxTextDistribution">
+                        <div class="boxDistribution">
+                            <canvas id="chartPlainNumber"></canvas>
+                        </div>
+                    </div>
+                    
+
+                    <p> Now, let's see an example of how we will apply RSA letter by letter.
+
+                    <h5>RSA Encryption Example: "ciao"</h5>
+
+                    <div class="esempio">
+                        <p>We will use the new keys we just generated:</p>
+
+                        <div class="chiavi">
+                            <ul>
+                                <li><strong>Public Key (for encrypting):</strong> <code>n = 187</code>, <code>e = 3</code></li>
+                                <li><strong>Private Key (for decrypting):</strong> <code>n = 187</code>, <code>d = 107</code></li>
+                            </ul>
+                        </div>
+
+                        <p>The process involves two phases:</p>
+
+                        <h3>1. Mapping (Letters to Numbers)</h3>
+                        <p>First, we need to transform "ciao" into numbers. Since our $n$ (187) is larger than 122, we can use the standard <strong>ASCII</strong> mapping for lowercase letters (from 'a'=97 to 'z'=122).</p>
+                        <ul>
+                            <li><strong>c</strong> = <strong>99</strong></li>
+                            <li><strong>i</strong> = <strong>105</strong></li>
+                            <li><strong>a</strong> = <strong>97</strong></li>
+                            <li><strong>o</strong> = <strong>111</strong></li>
+                        </ul>
+                        <p>Our plaintext message, <i>M</i>, is now the sequence of numbers: <strong>[99, 105, 97, 111]</strong>.</p>
+                        <p><strong>Fundamental Requirement:</strong> Every number <i>M</i> we encrypt must be smaller than <i>n</i>. Our numbers (99, 105, 97, 111) are all smaller than <i>n=187</i>, so we can proceed.</p>
+
+                        <h3>2. Encryption (Applying the RSA Formula)</h3>
+                        <p>Now we apply the encryption formula <strong><i>C</i> = <i>M</i><sup><i>e</i></sup> (mod <i>n</i>)</strong> to <em>each number</em> in our sequence.</p>
+                        <p>Remember: <code>e=3</code> and <code>n=187</code>.</p>
+
+                        <ul>
+                            <li>
+                                <strong>Letter 'c' (M = 99)</strong>
+                                <ul>
+                                    <li><i>C</i><sub>1</sub> = 99<sup><i>e</i></sup> (mod 187)</li>
+                                    <li><i>C</i><sub>1</sub> = 99<sup>3</sup> (mod 187)</li>
+                                    <li><i>C</i><sub>1</sub> = 970299 (mod 187)</li>
+                                    <li><i>Calculation: 970299 &divide; 187 = 5188 with a remainder of 143.</i></li>
+                                    <li><strong>Result 1: 143</strong></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Letter 'i' (M = 105)</strong>
+                                <ul>
+                                    <li><i>C</i><sub>2</sub> = 105<sup><i>e</i></sup> (mod 187)</li>
+                                    <li><i>C</i><sub>2</sub> = 105<sup>3</sup> (mod 187)</li>
+                                    <li><i>C</i><sub>2</sub> = 1157625 (mod 187)</li>
+                                    <li><i>Calculation: 1157625 &divide; 187 = 6190 with a remainder of 95.</i></li>
+                                    <li><strong>Result 2: 95</strong></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Letter 'a' (M = 97)</strong>
+                                <ul>
+                                    <li><i>C</i><sub>3</sub> = 97<sup><i>e</i></sup> (mod 187)</li>
+                                    <li><i>C</i><sub>3</sub> = 97<sup>3</sup> (mod 187)</li>
+                                    <li><i>C</i><sub>3</sub> = 912673 (mod 187)</li>
+                                    <li><i>Calculation: 912673 &divide; 187 = 4880 with a remainder of 113.</i></li>
+                                    <li><strong>Result 3: 113</strong></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Letter 'o' (M = 111)</strong>
+                                <ul>
+                                    <li><i>C</i><sub>4</sub> = 111<sup><i>e</i></sup> (mod 187)</li>
+                                    <li><i>C</i><sub>4</sub> = 111<sup>3</sup> (mod 187)</li>
+                                    <li><i>C</i><sub>4</sub> = 1367631 (mod 187)</li>
+                                    <li><i>Calculation: 1367631 &divide; 187 = 7313 with a remainder of 100.</i></li>
+                                    <li><strong>Result 4: 100</strong></li>
+                                </ul>
+                    </p>
+
+                    <p>
+                        Returning to our first example, after transforming the letters into numbers and applying RSA, the distribution of our text looks like this (for simplicity, labels with zero frequency have been omitted), since the letters with zero frequency were lost anyway, mixed in with other encryption mappings that were never "hit":
+
+                        <div class="boxTextDistribution">
+                            <div class="boxDistribution">
+                                <canvas id="chartCipherNumber"></canvas>
+                            </div>
+                        </div>
+                    </p>
+
+
+
+                </p>
+            </div>
+
+            <div class="assignement-result">
+                <h4>Decoding with Frequency Analysis</h4>
+                <strong>Idea:</strong>
+                <p>
+                    Since we know that the original text is in <strong>Italian</strong>, the approach used to decrypt ciphertext is to try to find the letter 'a' by checking the 3 most frequent letters in the ciphertext distribution.
+                </p>
+
+                <p>As we can see, the <strong>3 most frequent letters</strong> (from the ASCII mapping) are 118, 113, and 95. Let's <strong>try to assume</strong>, for example, that 118 is the letter <strong>'a'</strong>. We know that in <strong>ASCII, 'a'</strong> = 97. So, since we know c = m<sup>e</sup> (mod n), and we know e=3 and n=187, <strong>let's try</strong>:</p>
+
+                <p style="text-align: center;">
+                    118 = 97 <sup>3</sup> mod (187) ?
+                </p>
+
+                <p>No, in fact 97 <sup>3</sup> mod 187 = 113, <strong>which</strong> is not 118. Let's try with 113:</p>
+                <p style="text-align: center;">
+                    113 = 97 <sup>3</sup> mod (187) ?
+                </p>
+                <p><strong>Yes!</strong> But now <strong>everything</strong> is trivial...</p>
+            </div>
+
+
+        </section>
+
+    </main>
+    
+</body>
+</html>

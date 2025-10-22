@@ -1,0 +1,30 @@
+.boxTextDistribution {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  font-family: "Georgia", serif;
+}
+
+.boxText {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  height: 300px;
+  overflow-y: scroll;
+  white-space: pre-wrap;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+canvas {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+}
