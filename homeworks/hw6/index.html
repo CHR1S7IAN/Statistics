@@ -7,13 +7,22 @@
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/homework.css">
 
+    <!--  for formula   -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+
     <title>Homework 6</title>
 </head>
 <body class="homework-page">
 
     <header>
-        <h1><a href="../../index.html">← Portfolio Homework</a></h1>
+        <h1>
+            <a href="../../index.html" id="homeButton">
+                <span class="icon">🏠</span> 
+                Portfolio Homework
+            </a>
+        </h1>
     </header>
+    
 
     <main>
         <!-- intro -->
@@ -34,10 +43,367 @@
 
             <div class="assignement-process">
 
+                <h4>
+                    Efficient and Stable Statistics: Deriving Online Algorithms
+                </h4>
+
+                <p>
+                    The standard "batch" computation of statistical measures, such as the arithmetic mean and variance, requires access to the entire dataset at once. This approach, while straightforward, suffers from critical drawbacks in modern data processing, especially with large or streaming datasets.
+                </p>
+
+                <p>
+                    Traditional batch algorithms are:
+                </p>
+                <ul>
+                    <li><strong>Computationally Inefficient:</strong> The entire dataset must be re-processed if a single new data point becomes available.</li>
+                    <li><strong>Memory-Intensive:</strong> The full dataset must be stored in memory, which is often infeasible.</li>
+                    <li><strong>Numerically Unstable:</strong> Standard variance formulas are highly prone to numerical errors, such as <strong>catastrophic cancellation</strong> and overflow, when dealing with large numbers or small variations.</li>
+                </ul>
+
+                <p>
+                    This homework addresses these challenges by focusing on <strong>online algorithms</strong>. These incremental methods process data one point at a time, updating the current statistics efficiently without storing the entire data history.
+                </p>
+                
+                <h4>
+                    Formula for the arithmetic mean
+                </h4>
+                <ul>
+
+                    <li>
+                        <h5>Classic (Batch) Formula</h5>
+                        <p>
+                            This is the standard formula for the arithmetic mean, which requires all data to be available at once. For a dataset with \(n\) values (\(x_1, x_2, \dots, x_n\)), the mean \(\mu_n\) is:
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \frac{1}{n} \sum_{i=1}^{n} x_i $$
+                        </div>
+
+                        <p>
+                            Where:
+                        </p>
+                        <ul>
+                            <li><strong>\(\mu_n\)</strong>: The mean of the \(n\) values.</li>
+                            <li><strong>\(n\)</strong>: The total number of values.</li>
+                            <li><strong>\(x_i\)</strong>: The \(i\)-th value in the dataset.</li>
+                            <li><strong>\(\sum\)</strong>: The summation symbol.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h5>
+                            Derivation of the Incremental Mean Formula
+                        </h5>
+
+                        <p>
+                            We want to derive the online formula \(\mu_n = \mu_{n-1} + \frac{1}{n} (x_n - \mu_{n-1})\).
+                        </p>
+                        <p>
+                            We begin with the standard (batch) definition of the mean for \(n\) items, \(\mu_n\).
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \frac{1}{n} \sum_{i=1}^{n} x_i $$
+                        </div>
+
+                        <p>
+                            The key step is to separate the last term, \(x_n\), from the sum.
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \frac{1}{n} \left( \left( \sum_{i=1}^{n-1} x_i \right) + x_n \right) $$
+                        </div>
+
+                        <p>
+                            Now, we use the definition of the <em>previous</em> mean, \(\mu_{n-1}\), which is the mean of the first \(n-1\) items.
+                        </p>
+
+                        <div>
+                            $$ \mu_{n-1} = \frac{1}{n-1} \sum_{i=1}^{n-1} x_i $$
+                        </div>
+
+                        <p>
+                            We can rearrange this to solve for the sum of the first \(n-1\) items.
+                        </p>
+
+                        <div>
+                            $$ (n-1) \mu_{n-1} = \sum_{i=1}^{n-1} x_i $$
+                        </div>
+
+                        <p>
+                            Let's substitute this result (from Step 4) back into our equation from Step 2.
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \frac{1}{n} \left( (n-1) \mu_{n-1} + x_n \right) $$
+                        </div>
+
+                        <p>
+                            Now, we distribute the \(\frac{1}{n}\) term.
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \frac{n-1}{n} \mu_{n-1} + \frac{1}{n} x_n $$
+                        </div>
+
+                        <p>
+                            This is a valid recursive formula, but we want to get to the "correction" form. We use a small algebraic trick: rewrite \(\frac{n-1}{n}\) as \( \left( \frac{n}{n} - \frac{1}{n} \right) \), which simplifies to \( \left( 1 - \frac{1}{n} \right) \).
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \left( 1 - \frac{1}{n} \right) \mu_{n-1} + \frac{1}{n} x_n $$
+                        </div>
+
+                        <p>
+                            Expand the \(\mu_{n-1}\) term:
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \mu_{n-1} - \frac{1}{n} \mu_{n-1} + \frac{1}{n} x_n $$
+                        </div>
+
+                        <p>
+                            Finally, factor out \(\frac{1}{n}\) from the last two terms to arrive at the desired online formula.
+                        </p>
+
+                        <div>
+                            $$ \mu_n = \mu_{n-1} + \frac{1}{n} (x_n - \mu_{n-1}) $$
+                        </div>
+
+                        <p>
+                            This final equation shows that the new mean is just the old mean plus a small correction, which is proportional to the difference between the new value and the old mean.
+                        </p>
+                    </li>
+
+                </ul>
+
+                <h4>
+                    Formula for the variance 
+                </h4>
+
+                <ul>
+                    <li>
+                        <h5>Classic (Batch) Variance Formula</h5>
+                        <p>
+                            The standard formula for <strong>sample variance</strong> (\(s^2\)) requires the mean (\(\mu_n\)) and the entire dataset.
+                        </p>
+
+                        <div>
+                            $$ s^2_n = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \mu_n)^2 $$
+                        </div>
+
+                        <p>
+                            To compute this online, we track the <strong>sum of squared differences</strong>, often called \(M_{2,n}\).
+                        </p>
+                        <div>
+                            $$ M_{2,n} = \sum_{i=1}^{n} (x_i - \mu_n)^2 $$
+                        </div>
+                        
+                        <p>
+                            The variance can be found at any step using \(s^2_n = \frac{M_{2,n}}{n-1}\) (for sample variance) or \(\sigma^2_n = \frac{M_{2,n}}{n}\) (for population variance). Our goal is to find a recurrence relation for \(M_{2,n}\).
+                        </p>
+                        <p>
+                            Where:
+                        </p>
+                        <ul>
+                            <li><strong>\(s^2_n\)</strong>: The sample variance after \(n\) values.</li>
+                            <li><strong>\(M_{2,n}\)</strong>: The sum of squared differences from the mean.</li>
+                            <li><strong>\(\mu_n\)</strong>: The mean of the \(n\) values.</li>
+                            <li><strong>\(n\)</strong>: The total number of values.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h5>
+                            Derivation of the Incremental Variance (Welford's Algorithm)
+                        </h5>
+
+                        <p>
+                            We want to find a recurrence relation for \(M_{2,n}\) using only \(M_{2,n-1}\) and the new value \(x_n\).
+                        </p>
+                        <p>
+                            We start with the definition of \(M_{2,n}\) and split the sum.
+                        </p>
+
+                        <div>
+                            $$ M_{2,n} = \sum_{i=1}^{n} (x_i - \mu_n)^2 = \sum_{i=1}^{n-1} (x_i - \mu_n)^2 + (x_n - \mu_n)^2 $$
+                        </div>
+
+                        <p>
+                            This is difficult because \(\mu_n\) is in the sum. We use an algebraic trick: substitute \(x_i - \mu_n = (x_i - \mu_{n-1}) - (\mu_n - \mu_{n-1})\) into the summation.
+                        </p>
+                        
+                        <div>
+                            $$ \sum_{i=1}^{n-1} \left( (x_i - \mu_{n-1}) - (\mu_n - \mu_{n-1}) \right)^2 $$
+                        </div>
+
+                        <p>
+                            We expand the square \((a - b)^2 = a^2 - 2ab + b^2\):
+                        </p>
+
+                        <div>
+                            $$ \sum_{i=1}^{n-1} \left[ (x_i - \mu_{n-1})^2 - 2(x_i - \mu_{n-1})(\mu_n - \mu_{n-1}) + (\mu_n - \mu_{n-1})^2 \right] $$
+                        </div>
+
+                        <p>
+                            Distribute the summation:
+                        </p>
+                        <ol>
+                            <li>\(\sum_{i=1}^{n-1} (x_i - \mu_{n-1})^2 = M_{2,n-1}\) (This is the <em>previous</em> sum of squares).</li>
+                            <li>\(-2(\mu_n - \mu_{n-1}) \sum_{i=1}^{n-1} (x_i - \mu_{n-1}) = 0\) (The sum of deviations from the mean is <strong>zero</strong>).</li>
+                            <li>\(\sum_{i=1}^{n-1} (\mu_n - \mu_{n-1})^2 = (n-1)(\mu_n - \mu_{n-1})^2\) (A constant added \(n-1\) times).</li>
+                        </ol>
+                        
+                        <p>
+                            Substitute these back into the original equation (Step 1):
+                        </p>
+
+                        <div>
+                            $$ M_{2,n} = \left[ M_{2,n-1} + 0 + (n-1)(\mu_n - \mu_{n-1})^2 \right] + (x_n - \mu_n)^2 $$
+                        </div>
+
+                        <p>
+                            This formula is correct, but can be simplified. We use the mean update formulas:
+                        </p>
+                        <ul>
+                            <li>Let \(\delta = x_n - \mu_{n-1}\)</li>
+                            <li>From the mean derivation: \(\mu_n - \mu_{n-1} = \frac{\delta}{n}\)</li>
+                            <li>And \(x_n - \mu_n = (x_n - \mu_{n-1}) - (\mu_n - \mu_{n-1}) = \delta - \frac{\delta}{n} = \delta \frac{n-1}{n}\)</li>
+                        </ul>
+
+                        <p>
+                            Substitute these \(\delta\) relations into the equation for \(M_{2,n}\):
+                        </p>
+
+                        <div>
+                            $$ M_{2,n} = M_{2,n-1} + (n-1)\left(\frac{\delta}{n}\right)^2 + \left(\delta \frac{n-1}{n}\right)^2 $$
+                        </div>
+                        
+                        <p>
+                            Simplify:
+                        </p>
+
+                        <div>
+                            $$ M_{2,n} = M_{2,n-1} + (n-1)\frac{\delta^2}{n^2} + (n-1)^2\frac{\delta^2}{n^2} $$
+                        </div>
+
+                        <p>
+                            Factor out \(\frac{(n-1)\delta^2}{n^2}\):
+                        </p>
+
+                        <div>
+                            $$ M_{2,n} = M_{2,n-1} + \frac{(n-1)\delta^2}{n^2} \left( 1 + (n-1) \right) $$
+                        </div>
+
+                        <div>
+                            $$ M_{2,n} = M_{2,n-1} + \frac{(n-1)\delta^2}{n^2} (n) = M_{2,n-1} + \delta^2 \frac{n-1}{n} $$
+                        </div>
+
+                        <p>
+                            This is a simple form, but we can make it even simpler by substituting \(\delta = (x_n - \mu_{n-1})\) and \(\delta \frac{n-1}{n} = (x_n - \mu_n)\).
+                        </p>
+                        
+                        <div>
+                            $$ \delta^2 \frac{n-1}{n} = \left( \delta \right) \left( \delta \frac{n-1}{n} \right) = (x_n - \mu_{n-1})(x_n - \mu_n) $$
+                        </div>
+
+                        <p>
+                            This gives us the final, elegant recurrence relation for \(M_2\):
+                        </p>
+
+                        <div>
+                            $$ M_{2,n} = M_{2,n-1} + (x_n - \mu_{n-1})(x_n - \mu_n) $$
+                        </div>
+                    </li>
+                </ul>
+
             </div>
 
             <div class="assignement-result">
+                <div>
+                    <h2>
+                        Implementation of algorithms in Python
+                    </h2>
+                    
+                    <h4>Classic (Batch) algorithms</h4>
 
+                <pre><code class="language-python">
+                import math
+
+                def batch_mean(data):
+                    """
+                    Calcola la media in modalità batch.
+                    Richiede tutti i dati in anticipo.
+                    """
+                    n = len(data)
+                    if n == 0:
+                        return 0.0
+                    
+                    return sum(data) / n
+
+                def batch_variance(data):
+                    """
+                    Calcola la varianza campionaria in modalità batch.
+                    """
+                    n = len(data)
+                    if n < 2:
+                        # La varianza non è definita per meno di 2 punti
+                        return 0.0 
+                    
+                    # 1. Calcola la media
+                    mean = batch_mean(data)
+                    
+                    # 2. Calcola la somma dei quadrati delle differenze
+                    sum_sq_diff = 0.0
+                    for x in data:
+                        sum_sq_diff += (x - mean) ** 2
+                        
+                    # Ritorna la varianza campionaria (divisa per n-1)
+                    return sum_sq_diff / (n - 1)
+
+                </code></pre>
+
+                    <h4>"Online" algorithms</h4>
+
+                <pre><code class="language-python">
+                class OnlineStatistics:
+                    
+                    def __init__(self):
+                        self.n = 0
+                        self.mean = 0.0
+                        self.m2 = 0.0  # Somma dei quadrati delle differenze (M_2,n)
+
+                    def update(self, x):
+                        """Aggiunge un nuovo valore 'x' al calcolo."""
+                        
+                        self.n += 1
+                        
+                        # Salva i valori per il calcolo della varianza
+                        delta = x - self.mean
+                        
+                        # --- Aggiornamento della Media ---
+                        # Applica la formula: mean_n = mean_{n-1} + (x - mean_{n-1}) / n
+                        self.mean += delta / self.n
+                        
+                        # --- Aggiornamento della Varianza ---
+                        # Applica la formula di Welford: M2_n = M2_{n-1} + (x - mean_{n-1}) * (x - mean_n)
+                        delta2 = x - self.mean  # Questo usa la *nuova* media
+                        self.m2 += delta * delta2
+
+                    def get_mean(self):
+                        """Ritorna la media attuale."""
+                        return self.mean
+
+                    def get_variance(self):
+                        """Ritorna la varianza campionaria (n-1)."""
+                        if self.n < 2:
+                            return 0.0  # Varianza non definita
+                        
+                        return self.m2 / (self.n - 1)
+
+                </code></pre>
+
+                </div>
             </div>
     
         </section>

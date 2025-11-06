@@ -2,6 +2,39 @@
 /* == Stile Generale per la Pagina Homework     == */
 /* ============================================= */
 
+/* Stili per il bottone/link */
+#homeButton {
+    display: inline-flex; /* Permette all'icona e al testo di stare sulla stessa riga */
+    align-items: center; /* Centra verticalmente icona e testo */
+    padding: 8px 15px;
+    border-radius: 20px; /* Bordi molto arrotondati */
+    background-color: rgba(0, 122, 255, 0.1); /* Blu chiaro trasparente */
+    color: #007aff; /* Testo blu iOS */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-weight: 600; /* Semibold, tipico iOS */
+    font-size: 16px;
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Effetto al passaggio del mouse */
+    border: 1px solid rgba(0, 122, 255, 0.2); /* Bordo sottile trasparente */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Ombra più pronunciata sul bottone */
+}
+
+#homeButton:hover {
+    background-color: rgba(0, 122, 255, 0.2); /* Blu leggermente più scuro al hover */
+    transform: translateY(-1px); /* Leggero sollevamento */
+}
+
+#homeButton:active {
+    background-color: rgba(0, 122, 255, 0.25); /* Ancora più scuro al click */
+    transform: translateY(0); /* Ritorna in posizione */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Ombra più piatta */
+}
+
+/* Stili per l'icona */
+#homeButton .icon {
+    margin-right: 8px; /* Spazio tra icona e testo */
+    font-size: 18px; /* Dimensione dell'icona */
+    line-height: 1; /* Assicura che l'icona sia ben allineata */
+}
 .homework-page main {
   max-width: 960px; /* Un po' più largo per contenuti complessi */
   margin: 2rem auto;
