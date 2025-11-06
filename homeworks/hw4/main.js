@@ -29,7 +29,8 @@ function generateSimulationData(numTrials, numSimulations) {
             if (risultato === 1) {
                 punteggioCorrente++;
             }
-            datiPunteggioSingolaSimulazione.push(punteggioCorrente);
+            // Calcola la frequenza relativa (punteggio / n_lanci)
+            datiPunteggioSingolaSimulazione.push(punteggioCorrente / i);
         }
         
         // 4. Aggiungi i dati di questa linea all'array delle serie
@@ -76,7 +77,7 @@ function generateSimulationDataFairless(numTrials, numSimulations, probabilityPe
             if (risultato === 1) {
                 punteggioCorrente++;
             }
-            datiPunteggioSingolaSimulazione.push(punteggioCorrente);
+            datiPunteggioSingolaSimulazione.push(punteggioCorrente / i);
         }
         
         // 4. Aggiungi i dati di questa linea all'array delle serie
@@ -119,7 +120,7 @@ function createCoinFlipChart(elementSelector, seriesData, labelsAsseX, numTrials
             scales: {
                 y: {
                     min: 0,          
-                    max: numTrials,    
+                    //max: numTrials,    
                     title: { 
                         display: true,
                         text: 'Score' 
@@ -296,14 +297,14 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     // 2. Calcola la distribuzione
-    let distributionData = calculateScoreDistribution(seriesData);
+    // let distributionData = calculateScoreDistribution(seriesData);
 
     // 3. Crea il grafico di distribuzione
-    createDistributionChart(
-        "chart500Distribution", 
-        distributionData,
-        trials
-    );
+    // createDistributionChart(
+    //     "chart500Distribution", 
+    //     distributionData,
+    //     trials
+    // );
 
     // 1. Genera i dati (per il grafico a linee e per la distribuzione)
     ({seriesData, labelsAsseX} = generateSimulationDataFairless(trials, sims, 90));
@@ -317,14 +318,14 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     // 2. Calcola la distribuzione
-    distributionData = calculateScoreDistribution(seriesData);
+    // distributionData = calculateScoreDistribution(seriesData);
 
     // 3. Crea il grafico di distribuzione
-    createDistributionChart(
-        "chart500DistributionTruccato", 
-        distributionData,
-        trials
-    );
+    // createDistributionChart(
+    //     "chart500DistributionTruccato", 
+    //     distributionData,
+    //     trials
+    // );
 
     // --- 2. LOGICA PER LA SEZIONE INTERATTIVA ---
     
@@ -367,11 +368,11 @@ document.addEventListener('DOMContentLoaded', () => {
             sims
         );
         
-        interactiveBarChart = createDistributionChart(
-            "chartInteractiveDistribution", 
-            distributionData,
-            trials
-        );
+        // interactiveBarChart = createDistributionChart(
+        //     "chartInteractiveDistribution", 
+        //     distributionData,
+        //     trials
+        // );
     });
 
     // (Opzionale) Esegui una prima simulazione interattiva al caricamento

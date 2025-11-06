@@ -92,7 +92,7 @@
             <div class="assignement-process">
                 <p>
                     <h4>Experiment</h4>
-                    We want to provide a representation of the Law of Large Numbers by showing on a graph the trend of the score obtained by flipping a (fair) coin. Specifically, the x-axis of the graph shows the flips performed, and the y-axis shows the score (which starts from zero and is incremented every time heads comes up, and remains unchanged every time tails comes up). A line on the graph represents the trend of the score. This line will be a simulation. 
+                    We want to provide a representation of the Law of Large Numbers by showing on a graph the trend of the score obtained by flipping a (fair) coin. Specifically, the x-axis of the graph shows the flips performed, and the y-axis shows the relative frequency. A line on the graph represents the trend of the score. This line will be a simulation. 
                 </p>
             </div>
 
@@ -107,7 +107,7 @@
                 </div>
 
                 <p>
-                    As you can see, not always the final score will be 25 (half of maximum score) (try to reload the page for see different result) because of the inherent randomness (or 'chance') present in each individual flip.To elaborate: The 50% (or 1/2) probability is a long-term theoretical average, also known as the expected value (which is 25). It does not guarantee that you will get exactly 25 heads in any single set of 50 flips. Each flip is an independent, random event. Chance will almost always cause the final score to fluctuate around 25 (e.g., 23, 27, 25, 24...). This natural deviation from the expected value is called statistical variance.
+                    As you can see, not from first the frequency goes to 0.5. To elaborate: The 50% (or 1/2) probability is a long-term theoretical average, also known as the expected value (which is 0.5). Each flip is an independent, random event. Chance will almost always cause the final score to fluctuate around 0.5 (maybe 0.6, 0.7). This natural deviation from the expected value is called statistical variance.
                 </p>
 
                 <p>
@@ -123,7 +123,7 @@
                 </p>
 
                 <p>
-                    Let's see an example with the distribution over the 500 simulations:
+                    Let's see an example with 500 simulations:
                 </p>
 
                 <div class="charts-container">  
@@ -132,14 +132,14 @@
                         <canvas id="chart500SimulationWD"></canvas>
                     </div>
 
-                    <div class="chart-box-right">
+                    <!-- <div class="chart-box-right">
                         <canvas id="chart500Distribution"></canvas>
-                    </div>
+                    </div> -->
 
                 </div>
 
                 <p>
-                    Just for having a visual result of how distribution "moves", below an example, with 50 trials and 500 simulations, where the coin is not fair. In fact, with a probability of 90% heads comes up, and with a probability of 10% tails comes up.
+                    Just for having a visual result of how simulations "move", below an example, with 50 trials and 500 simulations, where the coin is not fair. In fact, with a probability of 90% heads comes up, and with a probability of 10% tails comes up.
                 </p>
 
                 <div class="charts-container">  
@@ -148,9 +148,9 @@
                         <canvas id="chart500SimulationWDTruccato"></canvas>
                     </div>
 
-                    <div class="chart-box-right">
+                    <!-- <div class="chart-box-right">
                         <canvas id="chart500DistributionTruccato"></canvas>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -180,9 +180,9 @@
                         <div class="chart-box-left">
                             <canvas id="chartInteractiveSimulation"></canvas>
                         </div>
-                        <div class="chart-box-right">
+                        <!-- <div class="chart-box-right">
                             <canvas id="chartInteractiveDistribution"></canvas>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
