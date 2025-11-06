@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
     <script src="main.js"></script>
 
     <title>Homework 3</title>
@@ -412,20 +413,72 @@
                 <h4>Decoding with Frequency Analysis</h4>
                 <strong>Idea:</strong>
                 <p>
-                    Since we know that the original text is in <strong>Italian</strong>, the approach used to decrypt ciphertext is to try to find the letter 'a' by checking the 3 most frequent letters in the ciphertext distribution.
+                    We have to do some assumption:
+                    <ul>
+                        <li>We know \(e\), beacuse of there are "standard" number used for \(e\). Since this set of number used for \(e\) is very small we can assume that we know \(e\), in this case \(e = 3\)</li>
+                        <li>
+                            We DON'T know \(n\), like in a real word, even if \(e\) and \(n\) are public 
+                        </li>
+                    </ul>
+                </p>
+                
+                <strong>Goal:</strong>
+                <p>
+                    We have to find all the variable: \(p, q, n, d\)
                 </p>
 
-                <p>As we can see, the <strong>3 most frequent letters</strong> (from the ASCII mapping) are 118, 113, and 95. Let's <strong>try to assume</strong>, for example, that 118 is the letter <strong>'a'</strong>. We know that in <strong>ASCII, 'a'</strong> = 97. So, since we know c = m<sup>e</sup> (mod n), and we know e=3 and n=187, <strong>let's try</strong>:</p>
+                <strong>Process:</strong>
 
-                <p style="text-align: center;">
-                    118 = 97 <sup>3</sup> mod (187) ?
+                <h4>Step 1: Order to match</h4>
+                <p>
+                    We ha to order our distribution, from highest frequency to lower frequency and take tha equivalent ascii. Since we know that the plain text is in Italian, as we can see from the distribution, the letter with highest frequency is the letter 'e' (ascii = 101), and the second highest frequency is the letter 'a' (ascii = 97). So, once we have ordered the distribution of the letter of the cipher text, we can match the two most frequency letters in cipher text. In this case we have the most frequncy cipher letter ascii = 118, and the second most frequency letter ascii = 113
+                </p>
+                
+
+                <h4>Step 2: Find \(n\)</h4>
+                <p>
+                    Now:
+                    <p>
+                        By definition, the encryption of M is:
+                        <p style="text-align: center;">
+                            c = m<sup>e</sup> (mod n)
+                        </p>
+                    </p>
+                    so:
+                    <p>
+                        <p style="text-align: center;">
+                            118 = 101<sup>3</sup> (mod n)
+                        </p>
+                        <p style="text-align: center;">
+                            113 = 97<sup>3</sup> (mod n)
+                        </p>
+                    </p>
+                    here the trick:
+                    <ul>
+                        <li>
+                            Let A: 118 = 101<sup>3</sup> (mod n)
+                        </li>
+                        <li>
+                            Let B: 113 = 97<sup>3</sup> (mod n)
+                        </li>
+                    </ul>
+                    <p style="text-align: center;">
+                        \(n\) = \(GCD(A,B)\)
+                    </p>
+                    and finally we have \(n = 187\) 
+                </p>
+                
+                <h4>Step 3: Bruteforce on \(n\)</h4>
+                <p>
+                    Since in this case we have assume that we use small p,q we can use bruteforce to find them.
                 </p>
 
-                <p>No, in fact 97 <sup>3</sup> mod 187 = 113, <strong>which</strong> is not 118. Let's try with 113:</p>
-                <p style="text-align: center;">
-                    113 = 97 <sup>3</sup> mod (187) ?
-                </p>
-                <p><strong>Yes!</strong> But now <strong>everything</strong> is trivial...</p>
+                <h4>Step 4: Cicle to find \(d\)</h4>
+                We know:
+                <p style="text-align: center;"><i>ed</i> &equiv; 1 (mod &varphi;(<i>n</i>))</p>
+
+                where &varphi;(<i>n</i>) = (p-1)(q-1). But know we know p,q from previous step. So we can just iterate to find \(d\). And that's all falks!
+
             </div>
 
 
