@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/homework.css">
+
+    
+
+    <title>Homework 5</title>
+</head>
+
+<body class="homework-page">
+    
+    <header>
+        <h1><a href="../../index.html">← Portfolio Homework</a></h1>
+    </header>
+
+    <main>
+
+        <!-- intro -->
+        <section class="homeworkHeader">
+            <h2>Hommework 5</h2>
+            <p><strong>Deadline: </strong>2025-11-06</p>
+        </section>
+
+        <!-- assignment -->
+        <section class="assignement">
+
+            <div class="assignement-description">
+                <p>
+                    <strong>Assignement</strong>
+                    Conduct research on the concepts of location and dispersion measures. Identify the most common types of measures of location and central tendency  (e.g., arithmetic mean, median, mode) and measures of dispersion (e.g., variance, standard deviation, interquartile range). Discuss their different uses, advantages, and limitations in various practical and statistical applications.
+                </p>
+            </div>
+
+            <div class="assignement-process">
+                <h4>Summarizing Data: Location and Dispersion</h4>
+
+                <p>When analyzing a set of data (like class grades, a team's heights, or product prices), looking at a long list of numbers isn't enough. We need to "summarize" them. To do this, we use two main types of measures:</p>
+        
+                <ul>
+                    <li>Measures of Location (or Central Tendency)</li>
+                    <li>Measures of Dispersion (or Variability)</li>
+                </ul>
+
+                <h4>1. Measures of Location</h4>
+
+                <p>These indices tell you the <strong>"typical" value</strong> or the <strong>"center"</strong> of your dataset. They answer the question: "Where is the distributed located?"</p>
+                
+                <p>They are like the <em>address</em> for a group of people: they tell you <i>where</i> the group is located.</p>
+
+                <p><strong>Analogies:</strong></p>
+                <ul>
+                    <li>The <strong>average grade</strong> a professor uses to understand the class's overall performance.</li>
+                    <li>The <strong>median price</strong> of houses in a city, to understand what it "typically" costs to buy a home.</li>
+                    <li>The <strong>best-selling color</strong> (the mode) of a car.</li>
+                </ul>
+
+                <p><strong>Common types of measures of location</strong></p>
+
+                <ul>
+                    <li>
+                        <h4>Arithmetic Mean (Mean)</h4>
+                        <p>The arithmetic mean is the most common measure. It is calculated by <strong>summing all values</strong> in the dataset and <strong>dividing by the total number</strong> of values.</p>
+
+                        <p><strong>Practical Uses:</strong> Calculating the average exam score, the average monthly temperature, the average height of a group.</p>
+
+                        <p><strong>Advantages:</strong></p>
+                        <ul>
+                            <li>It is simple to calculate and easy to understand.</li>
+                            <li>It uses every single data point in the set.</li>
+                        </ul>
+
+                        <p><strong>Disadvantages (Limitations):</strong></p>
+                        <ul>
+                            <li>It is <strong>extremely sensitive to outliers</strong>. A single very high or very low value can drastically distort the mean, making it unrepresentative.</li>
+                            <li><strong>Example:</strong> In a group of 5 people with incomes [30k, 32k, 35k, 40k, 500k], the mean is 127.4k, a value that does not represent the majority of the group at all.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h4>Median</h4>
+                        <p>The median is the <strong>central value</strong> of a dataset after the data has been <strong>ordered</strong> from smallest to largest. If the number of data points is even, it is the average of the two central values.</p>
+
+                        <p><strong>Practical Uses:</strong> It is the preferred measure for describing data with high skewness or outliers, such as house prices or household incomes.</p>
+
+                        <p><strong>Advantages:</strong></p>
+                        <ul>
+                            <li>It is <strong>not affected by outliers (it is "robust")</strong>.</li>
+                            <li><strong>Example:</strong> In the income set [30k, 32k, <strong>35k</strong>, 40k, 500k], the median is 35k, a value that represents the "center" of the group much better than the mean of 127.4k.</li>
+                        </ul>
+
+                        <p><strong>Disadvantages (Limitations):</strong></p>
+                        <ul>
+                            <li>It ignores the actual value of most data points, focusing only on their position.</li>
+                            <li>It can be slightly more complex to calculate by hand than the mean.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h4>Mode</h4>
+                        <p>The mode is the <strong>value (or values) that appears most frequently</strong> in a dataset.</p>
+
+                        <p><strong>Practical Uses:</strong> Ideal for non-numerical (categorical) data, such as the best-selling t-shirt color, the most popular ice cream flavor, or the most common answer in a survey.</p>
+
+                        <p><strong>Advantages:</strong></p>
+                        <ul>
+                            <li>It is the only measure of central tendency usable for <strong>categorical data</strong>.</li>
+                            <li>It is easy to identify in a bar chart.</li>
+                        </ul>
+
+                        <p><strong>Disadvantages (Limitations):</strong></p>
+                        <ul>
+                            <li>A dataset may <strong>not have a mode</strong> (if all values are unique).</li>
+                            <li>It can have <strong>more than one mode</strong> (e.g., "bimodal"), making interpretation less clear.</li>
+                            <li>It is often the least informative measure for continuous numerical data.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>2. Measures of Dispersion</h2>
+
+                <p>These indices tell you how <strong>variable</strong> or <strong>spread out</strong> your data are around the center. They answer the question: "How much spread out is the distribution?"</p>
+                
+                <p>Using the address analogy: measures of dispersion tell you if the group of people is all clustered in one spot, or if they are scattered throughout the neighborhood.</p>
+
+                <p><strong>Analogies:</strong></p>
+                <ul>
+                    <li><strong>Class grades:</strong> Two classes can have the same average of 25, but one class has grades all between 24 and 26 (low dispersion), while the other has grades ranging from 18 to 30 (high dispersion).</li>
+                    <li><strong>Investments:</strong> Two investments might have the same <i>average</i> return (location), but one has a stable performance (low dispersion/risk), while the other has sharp peaks and crashes (high dispersion/risk).</li>
+                </ul>
+
+                <p><strong>Common types of measures of dispersion:</strong></p>
+
+                <ul>
+                    <li>
+                        <h4>Variance and Standard Deviation</h4>
+                        <p>These two measures are closely related. They measure the <strong>average distance of each data point from the mean</strong> of the entire group.</p>
+
+                        <ul>
+                            <li>The <strong>Variance</strong> is the average of the squared differences from the mean (it has squared units, e.g., meters squared, which are difficult to interpret).</li>
+                            <li>The <strong>Standard Deviation</strong> is the square root of the variance. This brings it back to the original unit of measurement (e.g., meters), making it much easier to interpret.</li>
+                        </ul>
+
+                        <p><strong>Practical Uses:</strong> Fundamental in quality control (how much does a product vary?), in finance (how "risky" or volatile is an investment?), and in almost all statistical tests.</p>
+
+                        <p><strong>Advantages:</strong></p>
+                        <ul>
+                            <li>They are the most comprehensive measures of dispersion because, like the mean, they use <strong>every single data point</strong> in the calculation.</li>
+                            <li>A low standard deviation means the data is clustered near the mean (high consistency).</li>
+                            <li>A high standard deviation means the data is very spread out (low consistency).</li>
+                        </ul>
+
+                        <p><strong>Disadvantages (Limitations):</strong></p>
+                        <ul>
+                            <li>Like the mean, they are <strong>very sensitive to outliers</strong>. A single extreme data point can "inflate" the standard deviation, making the data seem more spread out than it actually is.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Interquartile Range (IQR)</h4>
+                        <p>The IQR is the measure of dispersion that pairs with the median. It represents the <strong>width of the interval containing the middle 50%</strong> of the data.</p>
+
+                        <p>It is calculated by ordering the data, finding the 1st quartile (Q1, the 25th percentile) and the 3rd quartile (Q3, the 75th percentile), and then calculating: <strong>IQR = Q3 - Q1</strong>.</p>
+
+
+                        <p><strong>Practical Uses:</strong> Used with the median to describe data with skewed distributions or outliers (e.g., salary distributions). It is the basis for creating "box plots" (box and whisker plots).</p>
+
+                        <p><strong>Advantages:</strong></p>
+                        <ul>
+                            <li>It is <strong>robust and not affected by outliers</strong>. It focuses only on the "belly" of the data distribution.</li>
+                        </ul>
+
+                        <p><strong>Disadvantages (Limitations):</strong></p>
+                        <ul>
+                            <li>It completely ignores 50% of the data (the lowest 25% and the highest 25%), so it does not provide a complete picture of the variability.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Why do we need both?</h4>
+
+                <p>A measure of location by itself can be misleading.</p>
+
+                <div class="example">
+                    <p><strong>Example:</strong> Saying the average temperature in two cities is 20°C (same <i>location</i>) doesn't tell the whole story.</p>
+                    <ul>
+                        <li><strong>City A:</strong> Min 18°C, Max 22°C (low dispersion). Mild and stable climate.</li>
+                        <li><strong>City B:</strong> Min 5°C, Max 35°C (high dispersion). Extreme and unstable climate.</li>
+                    </ul>
+                </div>
+                
+                <p>Measures of <strong>location</strong> give you a summary, while measures of <strong>dispersion</strong> tell you how <strong>reliable</strong> and representative that summary is of the entire group.</p>
+
+                
+            </div>
+
+            <div class="assignement-result">
+
+            </div>
+
+        </section>
+
+    </main>
+    
+</body>
+
+</html>
