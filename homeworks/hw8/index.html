@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/homework.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="main.js" defer></script> 
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+
+    <title>Homework 8</title>
+
+    <style>
+        /* Style for the generated Pascal's Triangle */
+        #pascals-triangle-container pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .pascal-controls {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="homework-page">
+
+    <header>
+        <h1>
+            <a href="../../index.html" id="homeButton">
+                <span class="icon">🏠</span> 
+                Homework Portfolio
+            </a>
+        </h1>
+    </header>
+
+    <main>
+
+        <section class="homeworkHeader">
+            <h2>Homework 8</h2>
+            <p><strong>Deadline:</strong> 2025-11-20</p>
+        </section>
+
+        <section class="assignement">
+
+            <div class="assignement-description">
+
+                <p>
+                    <strong>Assignment</strong>
+                    Compare Bernoullli process with Random walk, visual properties, Binomial Coefficients, Tartaglia, Fibonacci, etc. Discuss the analogies between homework 7 and the previous one based on the Bernoulli process simulation of the Law of Large Numbers. Highlighting similarities and differences, illustrate the mathematical properties and relationships with binomial coefficients, Pascal's triangle, binomial expansion, the Fibonacci sequence, and combinatorial coefficients, etc.
+                </p>
+                
+            </div>
+
+            <div class="assignement-process">
+                
+                <h3>Discussion and Comparison</h3>
+
+                <h4>HMWK 4 (Law of Large Numbers) vs. HMWK 7 (Random Walk)</h4>
+                
+                <p>
+                    The fundamental analogy between Homework 4 (coin toss) and Homework 7 (server security) is that **both are based on a Bernoulli Process**: a sequence of independent random experiments, each with two possible outcomes (e.g., Heads/Tails, Secure/Breached).
+                </p>
+
+                <p>
+                    The **key difference** is not in the underlying process, but in *what we measure and visualize*:
+                </p>
+                
+                <ul>
+                    <li>
+                        <strong>Homework 4 (Law of Large Numbers):</strong> We plotted the **relative frequency (the mean)**, i.e., $S_n / n$ (where $S_n$ is the number of "successes" after $n$ trials). The goal was to show *convergence*: as $n$ increases, the graph of the mean tends to stabilize on a single value, the theoretical probability $p$.
+                    </li>
+                    <li>
+                        <strong>Homework 7 (Random Walk):</strong> We plotted the **cumulative score (the sum)**, $X_n$ (where $X_n$ is the sum of the +1 and -1 results). The goal was to show *diffusion*: as $n$ increases, the trajectories do not converge to a point, but "disperse," exploring an ever-wider range of values.
+                    </li>
+                </ul>
+
+                <p>
+                    In summary, HMWK 4 shows that the *mean* of the process converges, while HMWK 7 shows that the *sum* of the process diffuses.
+                </p>
+
+                <hr>
+
+                <h4>Random Walk and Binomial Coefficients</h4>
+
+                <p>
+                    The distribution of the final scores in the Random Walk (the bar chart in HMWK 7) is not random. It is a **Binomial Distribution** (shifted and scaled). Why?
+                </p>
+                <p>
+                    Let's imagine $n$ weeks (steps). To get a final score $S$, we must have had $k$ "secure" weeks (+1) and $(n-k)$ "breached" weeks (-1).
+                </p>
+                <ul>
+                    <li>The final score is: $S = (k \times +1) + ((n-k) \times -1) = k - n + k = 2k - n$.</li>
+                    <li>Solving for $k$: $k = (S + n) / 2$.</li>
+                </ul>
+                <p>
+                    The number of different *ways* (or paths) to get exactly $k$ successes in $n$ trials is given by the **Binomial Coefficient**:
+                </p>
+                <p style="text-align: center; font-size: 1.2em; font-family: 'Times New Roman', Times, serif;">
+                    $C(n, k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$
+                </p>
+                <p>
+                    This is why the histogram of final scores in HMWK 7 has that bell shape: the central scores (near 0) are more probable because there are many more *paths* (combinations) that lead to that result, compared to the extreme scores (like $+n$ or $-n$, for which only one path exists).
+                </p>
+
+                <hr>
+
+                <h4>Pascal's (Tartaglia's) Triangle</h4>
+
+                <p>
+                    Pascal's (or Tartaglia's) Triangle is a geometric visualization of precisely these binomial coefficients.
+                </p>
+                
+                <ul>
+                    <li>Each number in the triangle is the sum of the two numbers above it.</li>
+                    <li>Row $n$ of the triangle (starting from $n=0$) lists all the binomial coefficients $C(n, k)$ for $k$ from 0 to $n$.</li>
+                </ul>
+
+                <p>
+                    If we interpret the triangle as a "Random Walk," starting from the apex (row 0), each number $C(n, k)$ in row $n$ represents **exactly the number of possible paths** to arrive at that position after $n$ steps (assuming one can only move down-left or down-right).
+                </p>
+                <p>
+                    Row $n=50$ of the triangle (impossible to draw here) would give the exact shape of the (non-normalized) distribution we saw in HMWK 7 for 50 weeks.
+                </p>
+
+                <div class="pascal-controls">
+                    <label for="pascalRowsInput">Number of rows (n):</label>
+                    <input type="number" id="pascalRowsInput" value="10" min="1" max="25" style="width: 60px;">
+                    <button id="btnDisplayPascal">Generate Triangle</button>
+                </div>
+                <div id="pascals-triangle-container">
+                    </div>
+
+                <hr>
+
+                <h4>Binomial Expansion and Fibonacci Sequence</h4>
+                
+                <p>
+                    The connection is even deeper:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Binomial Expansion:</strong> The coefficients $C(n, k)$ are the same ones that appear in the expansion of the binomial $(x+y)^n$. 
+                        <br>
+                        $(x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k$
+                        <br>
+                        If $x=y=1$, we get $(1+1)^n = 2^n = \sum_{k=0}^{n} \binom{n}{k}$. This tells us that the sum of the numbers on row $n$ of the triangle is $2^n$, which is exactly the **total number of possible paths** in a random walk of $n$ steps.
+                    </li>
+                    <li>
+                        <strong>Fibonacci Sequence:</strong> There is also a hidden relationship with the Fibonacci sequence (1, 1, 2, 3, 5, 8...). If you sum the numbers along the "shallow diagonals" of Pascal's Triangle, you get the Fibonacci numbers. 
+                        [Image of Pascal's triangle with Fibonacci diagonals]
+                        This shows a surprising connection between combinatorial problems (like counting paths) and recursive sequences.
+                    </li>
+                </ul>
+
+            </div>
+
+            
+
+        </section>
+
+    </main>
+    
+</body>
+</html>
