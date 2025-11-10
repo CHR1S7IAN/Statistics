@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/homework.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="main.js" defer></script> 
+
+    <title>Homework 7</title>
+</head>
+<body class="homework-page">
+
+    <header>
+        <h1>
+            <a href="../../index.html" id="homeButton">
+                <span class="icon">🏠</span> 
+                Portfolio Homework
+            </a>
+        </h1>
+    </header>
+
+    <main>
+
+        <!-- intro -->
+        <section class="homeworkHeader">
+            <h2>Homework 7</h2>
+            <p><strong>Deadline:</strong> 2025-11-13</p>
+        </section>
+
+        <!-- assignmente -->
+        <section class="assignement">
+
+            <div class="assignement-description">
+
+                <p>
+                    <strong>Assignement</strong>
+                    Given a server that receives weekly security updates for n weeks and m attackers who can breach the system with probability p, generate random trajectories of the servers cumulative scores, assign +1 if the server remains secure in a week and -1 if it is breached, draw a parallel with a random walk and count how many trajectories reach each possible total score in your simulation and how those figures converge to the binomial distribution as n and m diverge
+                </p>
+                
+
+            </div>
+
+            <div class="assignement-process">
+                
+                <p>
+                    <h4>Experiment</h4>
+                    As a first representation, we show a graph of a single (possible) trajectory that represent a single attackers over n week. We set the probability p of attack success equal to 0.5
+                </p>
+
+                <p>
+                    Below a representation of a single attacker over 50 weeks.
+                </p>
+                
+                <div class="chart-container">  
+                    <canvas id="chartOneAttacker"></canvas>
+                </div>
+
+                <p>
+                    This represent a single random walk. 
+                </p>
+                <p>
+                    Let's see now a  representation of a 50 attacker over 50 weeks
+                </p>
+                <div class="chart-container">  
+                    <canvas id="chart50Attacker"></canvas>
+                </div>
+
+                <p>
+                    Just for having a visual result of how simulations "move", below an example, with 50 trials and 500 simulations, where attackers are very smart. In fact, with a probability of 90% can hack the server, and with a probability of 10% can't.
+                </p>
+
+                <div class="charts-container">  
+                    <canvas id="chart50AttackerNoFair"></canvas>
+                </div>
+
+                <p>
+                    As we can see, the score of the server decrease with more probability on each "attacker".
+                </p>
+
+                <p>
+                    <h4>
+                        Random walk and Binomial Distribution
+                    </h4>
+                    Now we want to show how the distribution of the final score of the server converge to the binomial distribution (since the score of the server is a random walk). Let's process the distribution:
+                </p>
+
+                <div class="charts-container">  
+                    <canvas id="chart5050WDLeft"></canvas>
+                </div>
+                <div class="charts-containert">
+                    <canvas id="chart5050WDRight"></canvas>
+                </div>
+
+            </div>
+
+            <div class="assignement-result">
+                <div class="assignement-result">
+
+                <h3>TRY ME</h3>
+                    <p>
+                        Adjust the number of weeks (random walk steps) and the number of attackers (simulations) below. Click "Run" to generate the new graphs.
+                    </p>
+
+                    <div class="interactive-controls">
+                        <div class="control-group">
+                            <label for="inputInteractiveWeeks">Numero di Settimane (n):</label>
+                            <input type="number" id="inputInteractiveWeeks" value="50" min="2" max="200" step="2">
+                        </div>
+                        <div class="control-group">
+                            <label for="inputInteractiveAttackers">Numero di Attacker (m):</label>
+                            <input type="number" id="inputInteractiveAttackers" value="500" min="1" max="5000">
+                        </div>
+                        <button id="btnRunInteractive">Esegui Simulazione</button>
+                    </div>
+
+                    <div class="charts-container">  
+                        <canvas id="chartInteractiveTrajectories"></canvas>
+                    </div>
+                    <div class="charts-container">
+                        <canvas id="chartInteractiveDistribution"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+    
+</body>
+</html>
