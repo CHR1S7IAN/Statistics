@@ -42,6 +42,157 @@
 
             <div class="assignement-process">
 
+                <article class="probability-explanation">
+  
+                    <section id="interpretations">
+                        <h4>1. The Main Interpretations of Probability</h4>
+                        <p>There are several "schools of thought" on what probability fundamentally represents. Each provides a different lens for understanding uncertainty.</p>
+
+                        <h3>Classical (Laplace)</h3>
+                        <p>This is the intuitive, introductory definition. If an experiment has <i>N</i> <strong>equally likely</strong> outcomes, and an event <i>A</i> consists of <i>k</i> of these "favorable" outcomes, then the probability of <i>A</i> is:</p>
+                        <p><i>P</i>(<i>A</i>) = <i>k</i> / <i>N</i> = (Favorable Cases) / (Total Possible Cases)</p>
+                        <blockquote>
+                        <strong>Limit:</strong> This approach fails when outcomes are not equally likely or when the sample space is infinite.
+                        </blockquote>
+
+                        <h3>Frequentist (von Mises)</h3>
+                        <p>The probability of an event is the <strong>limit of its relative frequency</strong> observed after repeating an experiment a very large (theoretically infinite) number of times under identical conditions.</p>
+                        <p><i>P</i>(<i>A</i>) = lim <sub><i>n</i>&rarr;&infin;</sub> (<i>n<sub>A</sub></i> / <i>n</i>)</p>
+                        <p>...where <i>n</i> is the total number of trials and <i>n<sub>A</sub></i> is the number of times <i>A</i> occurred.</p>
+                        <blockquote>
+                        <strong>Limit:</strong> This is not applicable to unique, one-time events (e.g., "the probability of candidate X winning tomorrow's election"), as they cannot be repeated.
+                        </blockquote>
+
+                        <h3>Subjective (Bayesian, de Finetti)</h3>
+                        <p>Probability is a measure of an individual's <strong>degree of belief</strong> that an event will occur, based on all available information. It is subjective, but must be *coherent* (to avoid guaranteed losses in bets, known as "Dutch books"). Probabilities are updated as new evidence becomes available, using Bayes' Theorem.</p>
+
+                        <h3>Geometric</h3>
+                        <p>An extension of the classical approach to continuous (and infinite) sample spaces. Probability is defined as the ratio of "measures" (length, area, volume):</p>
+                        <p><i>P</i>(<i>A</i>) = Measure(<i>A</i>) / Measure(&Omega;)</p>
+                        <blockquote>
+                        <strong>Limit:</strong> Can lead to paradoxes (like Bertrand's paradox) if the sample space and "random" mechanism are not precisely defined.
+                        </blockquote>
+                    </section>
+
+                    <section id="axioms">
+                        <h4>2. The Axiomatic Approach: A Common Foundation</h4>
+                        <p>The various interpretations are philosophically incompatible. The axiomatic approach, introduced by <strong>Andrey Kolmogorov</strong> in 1933, brilliantly resolves this conflict.</p>
+                        <p><strong>How?</strong> It ignores the question "What <i>is</i> probability?" (the semantics) and focuses instead on "How does probability <i>behave</i>?" (the syntax).</p>
+                        <p>Kolmogorov established three simple rules (axioms) that any probability function <i>P</i> must obey. It doesn't matter if your probability comes from counting (classical), frequency (frequentist), or belief (Bayesian); as long as it satisfies these axioms, you can use the entire mathematical machinery of probability theory.</p>
+                        <p>Given a sample space &Omega; (the set of all outcomes) and a family of events <i>F</i> (the subsets of &Omega; we assign probabilities to), a probability measure <i>P</i> is a function that satisfies:</p>
+                        <ul>
+                        <li><strong>Axiom 1 (Non-negativity):</strong> The probability of any event <i>E</i> is non-negative.
+                            <br><i>P</i>(<i>E</i>) &ge; 0 for every <i>E</i> &in; <i>F</i></li>
+                        <li><strong>Axiom 2 (Normalization):</strong> The probability of the entire sample space (the "certain event") is 1.
+                            <br><i>P</i>(&Omega;) = 1</li>
+                        <li><strong>Axiom 3 (Countable Additivity):</strong> For any sequence of <strong>mutually disjoint</strong> events (meaning <i>E<sub>i</sub></i> &cap; <i>E<sub>j</sub></i> = &emptyset; for <i>i</i> &ne; <i>j</i>), the probability of their union is the sum of their individual probabilities.
+                            <br><i>P</i>(<i>E</i><sub>1</sub> &cup; <i>E</i><sub>2</sub> &cup; ...) = <i>P</i>(<i>E</i><sub>1</sub>) + <i>P</i>(<i>E</i><sub>2</sub>) + ...</li>
+                        </ul>
+                    </section>
+
+                    <section id="measure-theory">
+                        <h4>3. Probability and Measure Theory</h4>
+                        <p>Kolmogorov's work established that probability theory is, in fact, a specialized branch of <strong>measure theory</strong>. Measure theory is the mathematical field that generalizes the concepts of length, area, and volume.</p>
+                        <p>The connection is a direct one-to-one mapping. A <strong>probability space</strong> (&Omega;, <i>F</i>, <i>P</i>) is simply a <strong>measure space</strong> (<i>X</i>, <i>M</i>, &mu;) where the total measure of the space is 1.</p>
+                        
+                        <table>
+                        <thead>
+                            <tr>
+                            <th>Measure Theory Concept</th>
+                            <th>Probability Theory Concept</th>
+                            <th>Explanation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Set (<i>X</i>)</td>
+                            <td><strong>Sample Space</strong> (&Omega;)</td>
+                            <td>The set of all possible outcomes (e.g., {Head, Tail}).</td>
+                            </tr>
+                            <tr>
+                            <td>&sigma;-Algebra (<i>M</i>)</td>
+                            <td><strong>&sigma;-Algebra</strong> (<i>F</i>)</td>
+                            <td>The family of <strong>events</strong>. The collection of subsets of &Omega; to which we can assign a probability.</td>
+                            </tr>
+                            <tr>
+                            <td>Measure (&mu;)</td>
+                            <td><strong>Probability Measure</strong> (<i>P</i>)</td>
+                            <td>A function <i>P</i>: <i>F</i> &rarr; [0, 1] that assigns a probability to each event.</td>
+                            </tr>
+                        </tbody>
+                        </table>
+
+                        <h3>Random Variables as Measurable Functions</h3>
+                        <p>In this framework, a <strong>Random Variable</strong> <i>X</i> (which assigns a number to an outcome, e.g., <i>X</i>(Head) = 1) is formally defined as a <strong>measurable function</strong>.</p>
+                        <p>A function <i>X</i>: &Omega; &rarr; <b>R</b> is measurable if, for any real number <i>x</i>, the set of outcomes &omega; such that <i>X</i>(&omega;) &le; <i>x</i> is an event in our &sigma;-algebra <i>F</i>.</p>
+                        <p>{&omega; &in; &Omega; | <i>X</i>(&omega;) &le; <i>x</i>} &in; <i>F</i></p>
+                        <p>This formalism ensures that it is "legal" to ask questions like "What is the probability that <i>X</i> is less than or equal to <i>x</i>?".</p>
+                    </section>
+
+                    <section id="derivations">
+                        <h4>4. Derivations from the Axioms</h4>
+                        <p>Using only the three axioms, we can derive all other rules of probability.</p>
+
+                        <summary><h3>Derivation: Inclusion-Exclusion Principle (for n=2)</h3></summary>
+                        <div class="proof">
+                            <p><strong>Goal:</strong> Prove <i>P</i>(<i>A</i> &cup; <i>B</i>) = <i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i>) - <i>P</i>(<i>A</i> &cap; <i>B</i>).</p>
+                            <ol>
+                            <li>We can write the union <i>A</i> &cup; <i>B</i> as the union of two disjoint sets: <i>A</i> and (<i>B</i> \ <i>A</i>) (elements in <i>B</i> but not in <i>A</i>).</li>
+                            <li>By <strong>Axiom 3 (Additivity)</strong>, since <i>A</i> and (<i>B</i> \ <i>A</i>) are disjoint:
+                                <br><i>P</i>(<i>A</i> &cup; <i>B</i>) = <i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i> \ <i>A</i>) --- (Eq. 1)</li>
+                            <li>Now, consider event <i>B</i>. We can also split it into two disjoint parts: (<i>B</i> &cap; <i>A</i>) and (<i>B</i> \ <i>A</i>).</li>
+                            <li>Applying <strong>Axiom 3</strong> to <i>B</i>:
+                                <br><i>P</i>(<i>B</i>) = <i>P</i>(<i>B</i> &cap; <i>A</i>) + <i>P</i>(<i>B</i> \ <i>A</i>)</li>
+                            <li>Rearranging this, we get an expression for <i>P</i>(<i>B</i> \ <i>A</i>):
+                                <br><i>P</i>(<i>B</i> \ <i>A</i>) = <i>P</i>(<i>B</i>) - <i>P</i>(<i>B</i> &cap; <i>A</i>) --- (Eq. 2)</li>
+                            <li>Finally, substitute (Eq. 2) into (Eq. 1):
+                                <br><i>P</i>(<i>A</i> &cup; <i>B</i>) = <i>P</i>(<i>A</i>) + [ <i>P</i>(<i>B</i>) - <i>P</i>(<i>B</i> &cap; <i>A</i>) ]</li>
+                            <li><strong><i>P</i>(<i>A</i> &cup; <i>B</i>) = <i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i>) - <i>P</i>(<i>A</i> &cap; <i>B</i>) (Q.E.D.)</strong></li>
+                            </ol>
+                        </div>
+
+                        <summary><h3>Derivation: Subadditivity (Boole's Inequality)</h3></summary>
+                        <div class="proof">
+                            <h5>Case 1: Finite (for n=2)</h5>
+                            <p><strong>Goal:</strong> Prove <i>P</i>(<i>A</i> &cup; <i>B</i>) &le; <i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i>).</p>
+                            <ol>
+                            <li>From the Inclusion-Exclusion principle:
+                                <br><i>P</i>(<i>A</i> &cup; <i>B</i>) = <i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i>) - <i>P</i>(<i>A</i> &cap; <i>B</i>).</li>
+                            <li>From <strong>Axiom 1 (Non-negativity)</strong>, we know that <i>P</i>(<i>A</i> &cap; <i>B</i>) &ge; 0.</li>
+                            <li>Therefore, -<i>P</i>(<i>A</i> &cap; <i>B</i>) &le; 0.</li>
+                            <li>If we remove this non-positive term from the right side, the right side can only increase or stay the same:
+                                <br><i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i>) - <i>P</i>(<i>A</i> &cap; <i>B</i>) &le; <i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i>).</li>
+                            <li>Combining steps 1 and 4 gives: <strong><i>P</i>(<i>A</i> &cup; <i>B</i>) &le; <i>P</i>(<i>A</i>) + <i>P</i>(<i>B</i>) (Q.E.D.)</strong></li>
+                            </ol>
+
+                            <h5>Case 2: Countable (General)</h5>
+                            <p><strong>Goal:</strong> Prove <i>P</i>(U<sub>i=1</sub><sup>&infin;</sup> <i>A<sub>i</sub></i>) &le; &sum;<sub>i=1</sub><sup>&infin;</sup> <i>P</i>(<i>A<sub>i</sub></i>).</p>
+                            <ol>
+                            <li>We construct a new sequence of sets <i>B<sub>i</sub></i> that are <strong>disjoint</strong> and have the same union as the <i>A<sub>i</sub></i>.
+                                <ul>
+                                <li><i>B</i><sub>1</sub> = <i>A</i><sub>1</sub></li>
+                                <li><i>B</i><sub>2</sub> = <i>A</i><sub>2</sub> \ <i>A</i><sub>1</sub></li>
+                                <li><i>B</i><sub>3</sub> = <i>A</i><sub>3</sub> \ (<i>A</i><sub>1</sub> &cup; <i>A</i><sub>2</sub>)</li>
+                                <li>...</li>
+                                </ul>
+                            </li>
+                            <li>By construction, the <i>B<sub>i</sub></i> sets are mutually disjoint, and U<sub>i</sub> <i>B<sub>i</sub></i> = U<sub>i</sub> <i>A<sub>i</sub></i>.</li>
+                            <li>Applying <strong>Axiom 3 (Countable Additivity)</strong> to the disjoint sequence <i>B<sub>i</sub></i>:
+                                <br><i>P</i>(U<sub>i</sub> <i>A<sub>i</sub></i>) = <i>P</i>(U<sub>i</sub> <i>B<sub>i</sub></i>) = &sum;<sub>i</sub> <i>P</i>(<i>B<sub>i</sub></i>).</li>
+                            <li>By construction, every <i>B<sub>i</sub></i> is a subset of its corresponding <i>A<sub>i</sub></i> (<i>B<sub>i</sub></i> &sube; <i>A<sub>i</sub></i>).</li>
+                            <li>By the monotonicity property (derived from the axioms, if <i>C</i> &sube; <i>D</i> then <i>P</i>(<i>C</i>) &le; <i>P</i>(<i>D</i>)), we have:
+                                <br><i>P</i>(<i>B<sub>i</sub></i>) &le; <i>P</i>(<i>A<sub>i</sub></i>) for all <i>i</i>.</li>
+                            <li>Substituting this inequality into the sum from step 3:
+                                <br>&sum;<sub>i</sub> <i>P</i>(<i>B<sub>i</sub></i>) &le; &sum;<sub>i</sub> <i>P</i>(<i>A<sub>i</sub></i>).</li>
+                            <li>Combining steps 3 and 6, we get the result:
+                                <br><strong><i>P</i>(U<sub>i</sub> <i>A<sub>i</sub></i>) &le; &sum;<sub>i</sub> <i>P</i>(<i>A<sub>i</sub></i>) (Q.E.D.)</strong></li>
+                            </ol>
+                        </div>
+
+                    </section>
+
+                    </article>
+
             </div>
 
             <div class="assignement-result">
