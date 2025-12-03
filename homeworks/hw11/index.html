@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/homework.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="main.js" defer></script> 
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <title>Homework 11</title>
+</head>
+<body class="homework-page">
+    
+    <header>
+        <h1>
+            <a href="../../index.html" id="homeButton">
+                <span class="icon">🏠</span> 
+                Portfolio Homework
+            </a>
+        </h1>
+    </header>
+
+    <main>
+
+        <!-- intro -->
+        <section class="homeworkHeader">
+            <h2>Homework 11</h2>
+            <p><strong>Deadline:</strong> 2025-12-04</p>
+        </section>
+
+        <!-- assignment -->
+        <section class="assignment">
+
+            <div class="assignement-description">
+                <p>
+                    Use the stochastic differential equation simulator previously developed in earlier homework (Euler–Maruyama method) to simulate a Wiener process (Brownian motion).Optional: Generalize the program so that it can handle more general stochastic differential equations.
+                </p>
+            </div>
+
+            <div class="assignement-process">
+                <div class="poisson-content-wrapper"> <section class="explanation-section">
+                        <h2>Detailed Explanation of Concepts</h2>
+
+                        <div class="concept-block">
+                            <h3>1. The Wiener Process (Brownian Motion)</h3>
+                            <p>
+                                The <strong>Wiener Process</strong> ($W_t$) is the continuous-time limit of a random walk. It is the fundamental building block of stochastic calculus. Its key properties are:
+                            </p>
+                            <ul>
+                                <li><strong>Start at Zero:</strong> $W_0 = 0$.</li>
+                                <li><strong>Independent Increments:</strong> Future movements do not depend on past movements (Markov property).</li>
+                                <li><strong>Gaussian Increments:</strong> The change $W_{t+dt} - W_t$ follows a Normal distribution $\mathcal{N}(0, dt)$.</li>
+                            </ul>
+                        </div>
+
+                        <div class="concept-block">
+                            <h3>2. The Stochastic Differential Equation (SDE)</h3>
+                            <p>
+                                We are simulating an <strong>Arithmetic Brownian Motion (ABM)</strong> described by the SDE:
+                            </p>
+                            <p style="text-align: center; font-size: 1.2em; font-family: 'Times New Roman', serif;">
+                                $dX_t = \mu dt + \sigma dW_t$
+                            </p>
+                            <ul>
+                                <li><strong>Drift ($\mu dt$):</strong> The deterministic trend. If $\mu > 0$, the process tends to go up over time.</li>
+                                <li><strong>Diffusion ($\sigma dW_t$):</strong> The stochastic (random) part. $\sigma$ controls the volatility (noise).</li>
+                            </ul>
+                        </div>
+
+                        <div class="concept-block">
+                            <h3>3. The Numerical Method: Euler-Maruyama</h3>
+                            <p>
+                                Since computers cannot handle continuous time, we discretize the interval $T$ into $N$ steps of size $dt = T/N$. The <strong>Euler-Maruyama method</strong> approximates the next value as:
+                            </p>
+                            <p style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-family: monospace;">
+                                X<sub>n+1</sub> = X<sub>n</sub> + &mu;&middot;dt + &sigma;&middot;&radic;dt&middot;Z
+                            </p>
+                            <p>
+                                Where <strong>Z</strong> is a random number generated from a Standard Normal Distribution ($\mathcal{N}(0,1)$).
+                                <br>
+                                <strong>Crucial Note:</strong> We multiply the noise by $\sqrt{dt}$, not $dt$, because the variance of Brownian motion scales linearly with time ($Var(W_t) = t$).
+                            </p>
+                        </div>
+
+                        <div class="concept-block">
+                            <h3>4. Generalization (The "Optional" Part)</h3>
+                            <p>
+                                The code is structured to handle general SDEs where drift and diffusion are functions of the current state, not just constants:
+                                <br>
+                                $dX_t = a(X_t, t)dt + b(X_t, t)dW_t$
+                            </p>
+                            <p>
+                                While this simulation uses constant $\mu$ and $\sigma$, the underlying solver class supports complex models like <strong>Geometric Brownian Motion</strong> (where diffusion depends on $X_t$).
+                            </p>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+
+            <div class="assignement-result">
+                <div class="poisson-dashboard">
+                    <h3>SDE Simulator: Euler-Maruyama</h3>
+                    
+                    <div class="dashboard-controls">
+                        <div class="control-group">
+                            <label for="muInput">Drift ($\mu$):</label>
+                            <input type="number" id="muInput" value="0" step="0.1">
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="sigmaInput">Volatility ($\sigma$):</label>
+                            <input type="number" id="sigmaInput" value="1" step="0.1" min="0.01">
+                        </div>
+
+                        <div class="control-group">
+                            <label for="timeInput">Total Time (T):</label>
+                            <input type="number" id="timeInput" value="1" min="1">
+                        </div>
+
+                        <div class="control-group">
+                            <label for="nInput">Steps (N):</label>
+                            <input type="number" id="nInput" value="1000" min="100" step="100">
+                        </div>
+
+                        <div class="control-group">
+                            <label for="pathsInput">Simulations:</label>
+                            <input type="number" id="pathsInput" value="1" min="1" max="50">
+                        </div>
+
+                        <button class="btn-simulate" onclick="runSimulation()">Run Simulation</button>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="wienerChart"></canvas>
+                    </div>
+                    
+                    <div class="stats-panel">
+                        <div class="stat-item">Last Value $X_T$: <span id="lastValue">0</span></div>
+                        <div class="stat-item">Theoretical Mean ($\mu T$): <span id="theoMean">0</span></div>
+                        <div class="stat-item">Theoretical StdDev ($\sigma\sqrt{T}$): <span id="theoStd">0</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+</body>
+</html>
