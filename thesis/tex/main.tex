@@ -1,38 +1,457 @@
 % !TeX encoding = UTF-8
 % !TeX program = pdflatex
-% !TeX spellcheck = it_IT
-\documentclass[]{sapthesis}
+% !TeX spellcheck = en_US
+
+\documentclass[binding=0.6cm, noexaminfo]{sapthesis}
+
 \usepackage{microtype}
-\usepackage[italian]{babel}
+\usepackage[english]{babel} % Changed to English
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
-\hypersetup{pdftitle={La mia tesi},pdfauthor={Francesco Biccari}}
-\title{La mia tesi}
-\author{Francesco Biccari}
-\IDnumber{123456}
-\course{Laurea Magistrale in Fisica}
-\courseorganizer{Facoltà di Scienze Matematiche, Fisiche e Naturali}
-\AcademicYear{2021/2022}
-\advisor{Prof. Caio}
-\coadvisor{Dr. Sempronio}
-\authoremail{francesco.biccari@pippo.com}
-\copyyear{2022}
-\thesistype{Tesi di Laurea Magistrale}
+\usepackage{amsmath} 
+\usepackage{amssymb}
+\usepackage{graphicx} 
+\usepackage{listings} 
+\usepackage{xcolor}
+
+% Configuration to show JS code
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, let, const},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  sensitive=true
+}
+
+\lstset{
+   language=JavaScript,
+   basicstyle=\footnotesize\ttfamily,
+   numbers=left,
+   numberstyle=\tiny\color{gray},
+   stepnumber=1,
+   numbersep=5pt,
+   backgroundcolor=\color{white},
+   showspaces=false,
+   showstringspaces=false,
+   showtabs=false,
+   frame=single,
+   tabsize=2,
+   captionpos=b,
+   breaklines=true,
+   breakatwhitespace=false,
+   escapeinside={\%*}{*)}
+}
+
+\hypersetup{
+    pdftitle={The Law of Large Numbers},
+    pdfauthor={Christian Capitani},
+    colorlinks=true,   
+    linkcolor=black,   
+    urlcolor=blue,     
+    citecolor=black    
+}
+
+% Thesis Data
+\title{The Law of Large Numbers: meaning, simulations and applications in cybersecurity and data analysis}
+\author{Christian Capitani}
+\IDnumber{1905211}
+\course{Master's Degree in Cybersecurity} % Translated
+\courseorganizer{Faculty of Information Engineering, Informatics, and Statistics} % Translated
+\AcademicYear{2025/2026}
+\advisor{Prof. Gastaldi}
+\authoremail{capitani.1905211@studenti.uniroma1.it}
+\copyyear{2025}
+\thesistype{Course Thesis} % Translated
+
 \begin{document}
+
 \frontmatter
 \maketitle
-\dedication{Dedicato a\\ Donald Knuth}
+
 \begin{abstract}
-Questa tesi parla di me.
+This thesis explores the Law of Large Numbers (LLN), a fundamental theorem of probability theory that describes the result of performing the same experiment a large number of times. Through the development of an interactive simulator based on web technologies, the convergence of relative frequency to theoretical probability is visually analyzed. Finally, the paper discusses the practical implications of this theorem in the field of Data Analysis and, specifically, in Cybersecurity, analyzing how the LLN underpins Intrusion Detection Systems (Anomaly Detection).
 \end{abstract}
+
 \tableofcontents
+
 \mainmatter
-\chapter{Introduzione}
-...
+
+% -------------------------------------------------------------------
+\chapter{Introduction}
+In statistics and probability, intuition suggests that collecting a sufficient amount of data leads empirical observations to stabilize around a "true" value. This concept, formalized by the Law of Large Numbers (LLN), is the pillar upon which insurance companies, casinos, scientific research, and, as we shall see, cybersecurity rely.
+
+The objective of this paper is twofold:
+\begin{enumerate}
+    \item \textbf{Visualizing convergence:} Using a computational approach, we will demonstrate how empirical frequency converges to theoretical probability as the number of experiments increases ($n \to \infty$).
+    \item \textbf{Applying the concept to security:} We will analyze how deviation from this convergence can signal a cyber attack or a cryptographic vulnerability.
+\end{enumerate}
+
+% -------------------------------------------------------------------
+% -------------------------------------------------------------------
+\chapter{Theoretical Foundations}
+
+Before stating the Law of Large Numbers, it is necessary to precisely define the quantities involved and the type of "approach" that exists between them. In statistics, concepts of frequency and convergence take on different nuances compared to classical mathematical analysis.
+
+\section{Preliminary Concepts}
+
+\subsection{Absolute Frequency and Relative Frequency}
+In the analysis of a repeated random experiment (such as a coin toss or the analysis of network packets), we distinguish between two types of counts:
+
+\begin{itemize}
+    \item \textbf{Absolute Frequency ($n_k$):} This is the simple count of times a specific event $E$ has occurred over a total of $n$ trials. It is an integer $n_k \in \mathbb{N}$.
+    $$ n_k = \sum_{i=1}^{n} \mathbb{I}(X_i = E) $$
+    Where $\mathbb{I}$ is the indicator function which equals 1 if the event occurs, and 0 otherwise.
+    
+    \item \textbf{Relative Frequency ($f_n$):} This is the ratio between the absolute frequency and the total number of trials $n$. It is a real number between 0 and 1.
+    $$ f_n = \frac{n_k}{n} $$
+\end{itemize}
+
+\textbf{Fundamental Note:} The Law of Large Numbers concerns \textbf{relative frequency}. Absolute frequency, in fact, does not converge to a fixed value; on the contrary, it tends to diverge (for example, after a million coin tosses, the absolute difference between heads and tails can be very large, but their ratio $f_n$ will be extremely close to 0.5).
+
+\subsection{Mathematical Convergence vs. Stochastic Convergence}
+The term "converge" can be misleading if interpreted in a purely deterministic sense.
+
+\begin{itemize}
+    \item \textbf{Mathematical Convergence (Analytical):} Refers to deterministic numerical sequences. A sequence $a_n$ converges to a limit $L$ if, from a certain point onwards, the terms of the sequence become arbitrarily close to $L$. 
+    Example: The sequence $a_n = 1/n$ converges to 0. There is no uncertainty: for $n=1000$, the value will \textit{definitely} be 0.001.
+    $$ \lim_{n \to \infty} a_n = L $$
+
+    \item \textbf{Stochastic Convergence (in Probability):} Refers to random variables. Saying that the relative frequency $f_n$ converges to the probability $p$ does not mean that, upon reaching $n=1000$, the result will \textit{definitely} be $p$. It means that the \textbf{probability} that the result is different from $p$ becomes infinitesimal.
+    Even with a billion coin tosses, there is a non-zero (albeit tiny) probability of obtaining an anomalous sequence. Stochastic convergence describes the behavior of the probability distribution, not of the single number.
+    $$ \text{plim}_{n \to \infty} X_n = X $$
+\end{itemize}
+
+This distinction is crucial in \textbf{Cybersecurity}: security systems based on statistics (like IDS) do not offer absolute mathematical certainties (100\% security), but stochastic guarantees (security with probability tending to 1).
+
+\section{The Law of Large Numbers (LLN)}
+There are two main versions of this theorem that formalize the concept of convergence.
+
+Since in our paper we deal with Bernoulli-type experiments (success/failure, 1/0), we can specialize the general notation. We will therefore replace the sample mean $\bar{X}_n$ with the \textbf{relative frequency} $f_n$ and the expected value $\mu$ with the \textbf{theoretical probability} $p$.
+
+\subsection{Weak Law}
+The Weak Law (historically known as \textit{Bernoulli's Theorem}) states that for every margin of error $\epsilon > 0$, the probability that the relative frequency deviates from the theoretical probability by an amount greater than $\epsilon$ tends to zero as the number of trials $n$ tends to infinity:
+
+$$ \lim_{n \to \infty} P\left( | f_n - p | > \epsilon \right) = 0 $$
+
+This concept is known as \textit{convergence in probability}. In practical terms, it does not guarantee that a single deviation will not occur, but it says that observing one becomes increasingly unlikely as $n$ grows.
+
+\subsection{Strong Law}
+The Strong Law is stricter and states that the relative frequency converges to the theoretical probability with probability 1 (i.e., "almost surely"):
+
+$$ P\left( \lim_{n \to \infty} f_n = p \right) = 1 $$
+
+While the Weak Law speaks of the probability of being close to the target at a precise instant $n$, the Strong Law describes the behavior of the entire sequence: by increasing the number of simulations in our software, the trajectory of the graph will inevitably stabilize on the theoretical probability line, without any further large and persistent oscillations.
+
+% -------------------------------------------------------------------
+\chapter{Simulations and Graphic Representation}
+
+To empirically verify the exposed theory, a software simulator was developed using JavaScript. The experiment consists of simulating the toss of a coin ($p=0.5$) or a biased coin ($p \neq 0.5$) a number $n$ of times.
+
+\section{Experiment Implementation}
+The core of the simulation lies in the generation of pseudo-random numbers. Below is an extract of the code used to generate the convergence trajectories:
+
+\begin{lstlisting}[caption={Simulation data generation}]
+function generateSimulationData(numTrials, numSimulations) {
+    // ... setup arrays ...
+    for (let j = 0; j < numSimulations; j++) {
+        let currentScore = 0;
+        for (let i = 1; i <= numTrials; i++) {
+            // Simulate Bernoulli event (0 or 1)
+            const result = Math.round(Math.random()); 
+            if (result === 1) currentScore++;
+            
+            // Calculate current relative frequency
+            scoreData.push(currentScore / i);
+        }
+        // ... store data ...
+    }
+    return seriesData;
+}
+\end{lstlisting}
+
+\section{Results Analysis}
+
+\subsection{Case 1: High Variance (Small Numbers)}
+Performing a single simulation with few tosses ($n=50$), we observe a strong initial oscillation. The frequency is not stable and can deviate significantly from 0.5. This represents statistical "noise".
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{../imgs/1Sim50L.jpg} 
+    \caption{Single simulation with 50 tosses: strong initial oscillation.}
+    \label{fig:sim1}
+\end{figure}
+
+\subsection{Case 2: Convergence (Large Numbers)}
+By increasing the number of simulations ($m=500$) and the number of tosses, a "funnel" shape clearly emerges. Despite individual fluctuations, the mass of trajectories converges towards the line $y=0.5$.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{../imgs/500Sim50L.jpg} 
+    \caption{500 simulations: visualization of the Law of Large Numbers.}
+    \label{fig:sim500}
+\end{figure}
+
+\subsection{Case 3: Bias (Biased Coin)}
+Modifying the code to simulate a coin with $p=0.9$, convergence occurs nonetheless, but towards the new expected value. This demonstrates that the LLN is valid regardless of the value of $p$, provided the process is stationary.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{../imgs/500Sim50LTruccata.jpg} 
+    \caption{500 simulations with biased coin ($p=0.9$).}
+    \label{fig:sim500_biased}
+\end{figure}
+
+% -------------------------------------------------------------------
+
+\section{A Real-World Application: The Mathematics of Roulette}
+
+One of the most evident and commercially relevant applications of the Law of Large Numbers is found in the gambling industry. It is often said that "the house always wins". This statement is not the result of luck or secret manipulations, but is a direct consequence of the stochastic convergence guaranteed by the LLN.
+
+\subsection{Problem Modeling}
+Consider European Roulette, consisting of 37 numbers: from 0 to 36.
+A player betting on "Red" wins if one of the 18 red numbers comes up. If a black number (18) or zero (green) comes up, they lose.
+
+We can model this bet using the developed simulator, treating it as a Bernoulli variable, but with a success parameter $p$ slightly skewed against the player:
+
+$$
+P(\text{Win}) = \frac{\text{Red Numbers}}{\text{Total Numbers}} = \frac{18}{37} \approx 0.4864 \quad (48.6\%)
+$$
+
+$$
+P(\text{Loss}) = \frac{19}{37} \approx 0.5135 \quad (51.3\%)
+$$
+
+\subsection{Convergence Analysis and "House Edge"}
+The difference between a fair coin ($p=0.5$) and roulette ($p \approx 0.486$) seems minimal (about $1.4\%$), but over large numbers, it is decisive.
+
+\begin{itemize}
+    \item \textbf{Short Term (Small Numbers):} If a player places a few bets ($n=10$ or $n=50$), variance is high. As seen in the single simulation graph (Fig. \ref{fig:sim1}), relative frequency can oscillate well above 0.5. The player may find themselves winning.
+    
+    \item \textbf{Long Term (Large Numbers):} The casino operates on millions of plays ($n \to \infty$). Due to the Strong Law of Large Numbers, the player's win frequency will \textit{almost surely} converge to the theoretical value of $48.6\%$.
+\end{itemize}
+
+This systematic deviation from $50\%$ is defined as the \textbf{House Edge}.
+Using our simulator by setting the probability to 48.6\%, we can graphically observe how, as simulations increase, the score line inevitably stabilizes below the breakeven line, guaranteeing the casino a constant and predictable mathematical profit.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../imgs/roulette.jpg} 
+    \caption{Roulette Layout.}
+    \label{fig:roulette}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{../imgs/statRoulette.jpg} 
+    \caption{Statistical breakdown of Roulette outcomes.}
+    \label{fig:rouletteStat}
+\end{figure}
+
+% -------------------------------------------------------------------
+% -------------------------------------------------------------------
+\chapter{Applications in Data Analysis}
+
+The Law of Large Numbers is not just a mathematical abstraction, but the invisible engine that allows modern society to function. Without the guarantee that frequencies observed in a sample converge to real probabilities, entire industries such as insurance, finance, and digital marketing could not exist.
+
+In this chapter, we will analyze how the LLN transforms the uncertainty of a single data point into a reliable prediction, through four fundamental practical examples.
+
+\section{Polls and Market Research}
+The main problem in social data analysis is the impossibility of interviewing the entire population (for example, all 60 million Italian citizens) to know an opinion or an electoral preference.
+
+The analyst must rely on a \textit{sample}. This is where the Law of Large Numbers comes into play:
+\begin{itemize}
+    \item If we interview 10 people ($n=10$), the frequency of opinions will be extremely volatile. A single "extreme" opinion can completely skew the average (like a series of 10 coin tosses yielding 8 heads).
+    \item By increasing the sample to 1,000 or 2,000 people ($n \to \infty$), the LLN guarantees that the distribution of opinions in the sample faithfully reflects that of the entire population, with an increasingly reduced margin of error.
+\end{itemize}
+This principle allows predicting the outcome of national elections based on the responses of a few thousand individuals, saving enormous amounts of time and resources.
+
+\section{The Insurance Model and Risk Management}
+The insurance sector is perhaps the most direct application of the concept of convergence.
+Imagine a company insuring cars against accidents.
+\begin{itemize}
+    \item \textbf{The Single Event (Uncertainty):} For the company, it is impossible to know if Mr. Smith will have an accident this year. It is a binary random event (like a coin toss: 0 = no accident, 1 = accident). Insuring a single person is a gamble, not a business.
+    \item \textbf{The Mass (Certainty):} If the company insures 100,000 drivers, the Law of Large Numbers kicks in. Even if we don't know \textit{who} will have an accident, we know with extreme precision \textit{how many} accidents will occur in total (frequency converges to the statistical probability of an accident).
+\end{itemize}
+
+Thanks to this statistical stability, the company can calculate the insurance premium to cover costs and generate profit. Without the LLN, the variance of costs would be unsustainable.
+
+\section{Industrial Quality Control}
+In production chains (e.g., microchips or pharmaceuticals), it is impossible to test every single product, as testing is often destructive or too expensive.
+A batch of samples is therefore taken from the production line.
+\begin{itemize}
+    \item If out of 100 tested pieces, 2 are defective, the defect frequency is 2\%.
+    \item The LLN authorizes us to extend this result to the entire production of millions of pieces.
+\end{itemize}
+If the LLN were not valid, we would have no guarantee that the defect rate in the sample is representative of the total, making it impossible to guarantee high quality standards.
+
+\section{A/B Testing in Digital Marketing}
+In the digital world, decisions are not based on intuition but on data. A/B Testing is the standard technique for optimizing websites and apps.
+The experiment consists of showing Version A (e.g., blue button) to one group of users and Version B (e.g., red button) to another.
+
+Let's use a numerical example linked to our simulations:
+\begin{itemize}
+    \item \textbf{Scenario with few data ($n=50$):} Version A gets 4 clicks, Version B gets 8. It seems B is twice as good (16\% vs 8\%). However, as seen in our `chartOneSimulation` graph, with $n=50$ oscillations are violent. This difference could be pure chance.
+    \item \textbf{Scenario with many data ($n=5,000$):} The LLN stabilizes frequencies. If A is now at 10\% and B at 12\%, we can confidently say that B is genuinely superior.
+\end{itemize}
+
+Those who ignore the Law of Large Numbers in A/B testing risk making business decisions based on statistical "noise" rather than real user behavior, leading to economic losses.
+
+% -------------------------------------------------------------------
+\chapter{Applications in Cybersecurity}
+
+In the context of modern cybersecurity, the main challenge is no longer the lack of information, but the overabundance of data (logs, network packets, system calls). The Law of Large Numbers (LLN) provides the mathematical foundation to filter this enormous information flow, allowing analysts and algorithms to distinguish what is "normal" (expected behavior converging to a stable mean) from what is "anomalous" (an attack or a malfunction).
+
+In this chapter, we will delve into two pillars of operational security: anomaly-based intrusion detection systems and automated testing techniques (Fuzzing).
+
+\section{Anomaly Detection and Intrusion Detection Systems (IDS)}
+Intrusion detection systems fall into two main categories: \textit{Signature-based} (looking for known attack fingerprints) and \textit{Anomaly-based}. It is in the latter category that statistics and the LLN play a crucial role.
+
+The basic assumption is that traffic on a healthy network follows a stationary distribution. According to the LLN, by monitoring the network for a sufficient time ($n \to \infty$), traffic metrics will converge towards a robust statistical "Baseline".
+
+\subsection{Baseline Construction and Statistical Thresholds}
+To detect a never-before-seen attack (Zero-Day), the IDS must first "learn" normality.
+\begin{itemize}
+    \item \textbf{Training Phase (Large $n$):} The IDS analyzes millions of packets in the absence of attacks. It calculates the mean $\mu$ and variance $\sigma^2$ of various features (e.g., number of SYN requests per second, average packet size, session duration).
+    \item \textbf{The Law of Large Numbers:} Guarantees that if the observation period is long enough, the sample mean calculated by the IDS is a faithful representation of the infrastructure's real behavior.
+\end{itemize}
+
+\subsection{Attack Detection (Divergence)}
+A cyber attack alters the stochastic nature of traffic.
+Let's take a \textbf{DDoS (Distributed Denial of Service)} attack of the \textit{HTTP Flood} type as an example.
+\begin{enumerate}
+    \item Under normal conditions, HTTP requests arrive pseudo-randomly but with a stable average frequency $\mu_{norm}$.
+    \item During the attack, thousands of bots send simultaneous requests.
+    \item The IDS calculates the moving average over a recent time window. Suddenly, the observed mean $\bar{X}_n$ diverges significantly from the baseline $\mu_{norm}$ established by the LLN.
+    \item If the deviation $|\bar{X}_n - \mu_{norm}|$ exceeds a critical threshold (usually defined as $k \cdot \sigma$), an alarm is triggered.
+\end{enumerate}
+
+\subsection{The False Positive Problem and Sample Size}
+A classic problem with IDS is the rate of false positives (unjustified alarms). This is directly explainable via the LLN:
+\begin{itemize}
+    \item If the IDS makes decisions based on few packets (small $n$), variance is high (like in our simulation with 50 tosses). A normal spike in user traffic could be mistaken for an attack.
+    \item By increasing the sampling window (large $n$), measurement becomes more precise and false positives decrease, but the system becomes slower to react. The engineering challenge lies in finding the right balance for $n$.
+\end{itemize}
+
+\subsection{Case Study: Visualization of a DDoS Attack}
+To clarify the operation of a statistical IDS, we simulated a synthetic network traffic flow.
+As shown in Figure \ref{fig:ids_plot}, the system learned a historical \textit{Baseline} (green line) around 50 requests per second.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{../imgs/ids_plot.png} 
+    \caption{Detection of a statistical anomaly. The attack exceeds the confidence threshold established by historical variance.}
+    \label{fig:ids_plot}
+\end{figure}
+
+Normal traffic physiologically oscillates around the mean (natural variance). However, at time $t=140$, a simulated DDoS attack occurs. The local traffic mean instantly violates the \textit{Alarm Threshold} (red dashed line), calculated as $\mu + 3\sigma$.
+This graph visually demonstrates how the Law of Large Numbers allows defining a mathematical boundary between "licit noise" and "illicit signal".
+
+\section{Fuzzing: The Brute Force of Large Numbers}
+Fuzzing (or Fuzz Testing) is a dynamic software analysis technique that involves inputting random, malformed, or unexpected data into a program to cause crashes or unexpected behaviors (memory leaks, buffer overflows).
+
+While static code analysis looks for errors by reading the source code, Fuzzing relies on probability and computing power, leveraging the concept that "with enough attempts, every possible path will be explored".
+
+\subsection{State Space and Crash Probability}
+Complex software has a virtually infinite state space (set of all possible inputs and internal states). Critical bugs often reside in "Corner Cases", i.e., extremely rare input combinations that a human developer would hardly test.
+
+We can model vulnerability discovery as a Bernoulli event with extremely low probability $p$ (e.g., $p = 10^{-9}$).
+\begin{itemize}
+    \item With few tests (small $n$), the probability of finding the bug is almost zero.
+    \item The Law of Large Numbers tells us that the empirical crash frequency will converge to the real probability $p$.
+    \item However, the most interesting aspect here is the complementary event. The probability of \textit{not} finding the bug in $n$ attempts is $(1-p)^n$. Since $(1-p) < 1$, as $n \to \infty$, this probability tends to 0.
+\end{itemize}
+In other words: if we run the fuzzer for a sufficiently long time (millions or billions of iterations), the mathematical certainty of finding the vulnerability (if it exists) tends to 100\%.
+
+\subsection{Dumb Fuzzing vs. Smart Fuzzing}
+There are two main approaches, statistically interpretable:
+\begin{itemize}
+    \item \textbf{Dumb Fuzzing (Black Box):} Generates purely random inputs. It relies exclusively on brute force and the LLN. It requires an enormous $n$ to get results, as it explores the state space blindly.
+    \item \textbf{Coverage-guided Fuzzing (Grey Box):} Modern tools like \textit{AFL (American Fuzzy Lop)} use an evolutionary approach. When a random input discovers a new portion of code (increases Code Coverage), the tool uses it as a base for new mutations. 
+    Statistically, this equates to "loading the coin": the algorithm modifies the probability distribution of inputs to maximize the probability of visiting rare states, drastically reducing the number $n$ of attempts needed to find a crash compared to the purely random method.
+\end{itemize}
+
+In conclusion, Fuzzing is the industrial application of the "Infinite Monkey Theorem": thanks to the speed of modern processors, we can simulate the "infinity" needed for randomness to uncover human errors.
+
+\subsection{Practical Example: Fuzzing a Vulnerable Function}
+To demonstrate how randomness can explore complex code paths, consider the following Python example. Imagine a function \texttt{vulnerable\_process} containing a critical bug nested in a specific sequence of conditions ("Magic Number").
+
+A human might not notice the error in the code, but a \textit{Dumb Fuzzer}, based on the Law of Large Numbers, will generate infinite inputs until, statistically, it stumbles upon the combination that satisfies the conditions.
+
+\begin{lstlisting}[language=Python, caption={Demonstrative Fuzzing Script}, label={lst:fuzzing}]
+import random
+import string
+
+def vulnerable_process(user_input):
+    """
+    Vulnerable function that crashes only if the input 
+    satisfies very specific conditions (Corner Case).
+    """
+    # Condition 1: Exact length
+    if len(user_input) == 4:
+        # Condition 2: First character 'F'
+        if user_input[0] == 'F':
+            # Condition 3: Last character 'Z'
+            if user_input[3] == 'Z':
+                # Condition 4: Internal calculation
+                if user_input[1] == 'U' and user_input[2] == 'Z':
+                    raise Exception("CRASH! Input 'FUZZ' broke the system.")
+    return "Input processed correctly."
+
+# --- Fuzzer Simulation ---
+print("Starting Fuzzing...")
+attempts = 0
+
+while True:
+    attempts += 1
+    # Generate a random string of 4 uppercase letters
+    # Example: 'AAAA', 'XJKD', 'FUZZ'
+    fuzz_input = ''.join(random.choices(string.ascii_uppercase, k=4))
+    
+    try:
+        vulnerable_process(fuzz_input)
+    except Exception as e:
+        print(f"[-] Success! Bug found after {attempts} attempts.")
+        print(f"[-] Guilty input: {fuzz_input}")
+        break # Stop loop when bug is found
+
+# Expected result: 
+# The loop will continue until the LLN guarantees the string 'FUZZ' appears.
+\end{lstlisting}
+
+In this example, the state space is $26^4 = 456,976$ possible combinations. Although it seems large, for a modern computer generating them takes fractions of a second. The LLN assures us that, by keeping the loop active ($n \to \infty$), the probability of generating the string "FUZZ" tends to 1.
+
+% -------------------------------------------------------------------
+\chapter{Conclusions}
+In this paper, we analyzed the Law of Large Numbers starting from its mathematical definition up to its empirical verification through software simulation. 
+We demonstrated that the concept of "convergence of frequency to probability" is the keystone for transforming the uncertainty of a single random event into statistical certainty over large volumes of data.
+This property is what makes Big Data analysis possible and enables the construction of robust cybersecurity systems capable of distinguishing between background noise and real threats, or ensuring the unpredictability necessary for secure cryptography.
+
 \backmatter
 \cleardoublepage
-\phantomsection % Give this command only if hyperref is loaded
+\phantomsection
 \addcontentsline{toc}{chapter}{\bibname}
-% Here put the code for the bibliography. You can use BibTeX or
-% the BibLaTeX package or the simple environment thebibliography.
+
+\begin{thebibliography}{9}
+\bibitem{knuth}
+  D. E. Knuth,
+  \textit{The Art of Computer Programming, Vol. 2: Seminumerical Algorithms},
+  Addison-Wesley, 1997.
+
+\bibitem{ross}
+  Sheldon M. Ross,
+  \textit{Introduction to Probability Models},
+  Academic Press, 2019.
+
+\bibitem{stallings}
+  William Stallings,
+  \textit{Cryptography and Network Security: Principles and Practice},
+  Pearson, 2016.
+\end{thebibliography}
+
 \end{document}

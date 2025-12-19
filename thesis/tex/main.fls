@@ -90,13 +90,13 @@ INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/gen
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/arabi/bblopts.cfg
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/arabi/bblopts.cfg
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/arabi/bblopts.cfg
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/it/babel-italian.tex
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/it/babel-italian.tex
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/it/babel-italian.tex
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/it/babel-it.ini
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/babel-italian/italian.ldf
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/babel-italian/italian.ldf
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/babel-italian/italian.ldf
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/en/babel-english.tex
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/en/babel-english.tex
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/en/babel-english.tex
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/babel/locale/en/babel-en.ini
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/babel-english/english.ldf
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/babel-english/english.ldf
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/babel-english/english.ldf
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/base/inputenc.sty
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/base/inputenc.sty
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/hyperref/hyperref.sty
@@ -146,6 +146,25 @@ INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/lat
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/rerunfilecheck/rerunfilecheck.sty
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/generic/uniquecounter/uniquecounter.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/amssymb.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/amssymb.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/amsfonts.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/amsfonts.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/listings.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/listings.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstpatch.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstpatch.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstpatch.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstmisc.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstmisc.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstmisc.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/listings.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/listings.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/listings.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/xcolor/xcolor.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/xcolor/xcolor.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/graphics-cfg/color.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/graphics/mathcolor.ltx
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/t1lmr.fd
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/t1lmr.fd
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/t1lmr.fd
@@ -213,8 +232,25 @@ INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/lat
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/omxlmex.fd
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/omxlmex.fd
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/lmex10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsa.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsa.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsa.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/microtype/mt-msa.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/microtype/mt-msa.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/microtype/mt-msa.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsb.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsb.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/amsfonts/umsb.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/microtype/mt-msb.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/microtype/mt-msb.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/microtype/mt-msb.cfg
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr7.tfm
-INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr12.tfm
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr17.tfm
@@ -223,22 +259,109 @@ INPUT ./main.toc
 INPUT ./main.toc
 INPUT main.toc
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmbx10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/rm-lmr10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/rm-lmr8.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/rm-lmr6.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/lmmi10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/lmmi8.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/lmmi6.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/lmsy10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/lmsy8.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/lmsy6.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 OUTPUT main.toc
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmbx12.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr12.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmbx12.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ts1-lmr10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmri10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr8.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr6.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmr9.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/t1lmtt.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/t1lmtt.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/lm/t1lmtt.fd
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmtt9.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmtk10.tfm
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/tfm/public/lm/ec-lmtt10.tfm
+INPUT ../imgs/1Sim50L.jpg
+INPUT ../imgs/1Sim50L.jpg
+INPUT ../imgs/1Sim50L.jpg
+INPUT ../imgs/1Sim50L.jpg
+INPUT ../imgs/1Sim50L.jpg
+INPUT ../imgs/1Sim50L.jpg
+INPUT ../imgs/1Sim50L.jpg
+INPUT ../imgs/500Sim50L.jpg
+INPUT ../imgs/500Sim50L.jpg
+INPUT ../imgs/500Sim50L.jpg
+INPUT ../imgs/500Sim50L.jpg
+INPUT ../imgs/500Sim50L.jpg
+INPUT ../imgs/500Sim50L.jpg
+INPUT ../imgs/500Sim50L.jpg
+INPUT ../imgs/500Sim50LTruccata.jpg
+INPUT ../imgs/500Sim50LTruccata.jpg
+INPUT ../imgs/500Sim50LTruccata.jpg
+INPUT ../imgs/500Sim50LTruccata.jpg
+INPUT ../imgs/500Sim50LTruccata.jpg
+INPUT ../imgs/500Sim50LTruccata.jpg
+INPUT ../imgs/500Sim50LTruccata.jpg
+INPUT ../imgs/roulette.jpg
+INPUT ../imgs/roulette.jpg
+INPUT ../imgs/roulette.jpg
+INPUT ../imgs/roulette.jpg
+INPUT ../imgs/roulette.jpg
+INPUT ../imgs/roulette.jpg
+INPUT ../imgs/roulette.jpg
+INPUT ../imgs/statRoulette.jpg
+INPUT ../imgs/statRoulette.jpg
+INPUT ../imgs/statRoulette.jpg
+INPUT ../imgs/statRoulette.jpg
+INPUT ../imgs/statRoulette.jpg
+INPUT ../imgs/statRoulette.jpg
+INPUT ../imgs/statRoulette.jpg
+INPUT ../imgs/ids_plot.png
+INPUT ../imgs/ids_plot.png
+INPUT ../imgs/ids_plot.png
+INPUT ../imgs/ids_plot.png
+INPUT ../imgs/ids_plot.png
+INPUT ../imgs/ids_plot.png
+INPUT ../imgs/ids_plot.png
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstlang1.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstlang1.sty
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/tex/latex/listings/lstlang1.sty
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/enc/dvips/lm/lm-ec.enc
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/enc/dvips/lm/lm-mathsy.enc
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/enc/dvips/lm/lm-rm.enc
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/enc/dvips/lm/lm-mathex.enc
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/enc/dvips/lm/lm-ts1.enc
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmbx10.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmbx10.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmbx12.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmbx12.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmex10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmex10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmmi10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmmi10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmmi8.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmmi8.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr10.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr6.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr6.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr7.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr7.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr8.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmr8.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmri10.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmri10.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmss10.pfb
@@ -247,3 +370,15 @@ INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/t
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmss17.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmssbx10.pfb
 INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmssbx10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmsy10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmsy10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmsy8.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmsy8.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmtk10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmtk10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmtt10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmtt10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmtt9.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/lm/lmtt9.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+INPUT /Users/christian/Library/Application Support/MiKTeX/texmfs/install/fonts/type1/public/amsfonts/symbols/msbm10.pfb
